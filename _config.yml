@@ -1,0 +1,6 @@
+# Réglages de GitHub Pages. Le site lui-même est index.html, sans gabarit :
+# Jekyll ne sert ici qu’à fabriquer images/liste.json, la liste des images présentes.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - images/NOMS-DES-FICHIERS.csv

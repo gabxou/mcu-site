@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCU</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2B060B">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+/* Une adresse comme /classement mène à la page du même nom ; toute autre adresse mène à l’accueil. */
+(function(){
+  var p = location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+  var views = ['films', 'tout', 'classement', 'personnages', 'avancee', 'compte', 'cgu', 'contact'];
+  location.replace('/' + (views.indexOf(p) >= 0 ? '#' + p : ''));
+})();
+</script>
+<style>
+:root{color-scheme:dark}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:16px;box-sizing:border-box;background:#2B060B;color:#FFF6F6;font:400 1.05rem/1.5 "Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;text-align:center}
+a{color:#FFC53D}
+</style>
+</head>
+<body>
+<main>
+  <p>Cette page n’existe pas.</p>
+  <p><a href="/">Retour aux films</a></p>
+</main>
+</body>
+</html>

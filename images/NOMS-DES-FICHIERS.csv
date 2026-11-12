@@ -1,0 +1,121 @@
+dossier,nom_du_fichier_sans_extension,type,titre
+images,cap1,film,Captain America: First Avenger
+images,cm,film,Captain Marvel
+images,im1,film,Iron Man
+images,im2,film,Iron Man 2
+images,thor1,film,Thor
+images,av1,film,Avengers
+images,thor2,film,Thor : Le Monde des ténèbres
+images,im3,film,Iron Man 3
+images,cap2,film,Captain America : Le Soldat de l’hiver
+images,gotg1,film,Les Gardiens de la Galaxie
+images,gotg2,film,Les Gardiens de la Galaxie Vol. 2
+images,av2,film,Avengers : L’Ère d’Ultron
+images,ant1,film,Ant-Man
+images,cap3,film,Captain America: Civil War
+images,dp1,film,Deadpool
+images,bw,film,Black Widow
+images,bp1,film,Black Panther
+images,sm1,film,Spider-Man: Homecoming
+images,ds1,film,Doctor Strange
+images,thor3,film,Thor: Ragnarok
+images,ant2,film,Ant-Man et la Guêpe
+images,dp2,film,Deadpool 2
+images,av3,film,Avengers: Infinity War
+images,av4,film,Avengers: Endgame
+images,shang,film,Shang-Chi et la Légende des Dix Anneaux
+images,sm2,film,Spider-Man: Far From Home
+images,eternals,film,Les Éternels
+images,sm3,film,Spider-Man: No Way Home
+images,ds2,film,Doctor Strange in the Multiverse of Madness
+images,bp2,film,Black Panther: Wakanda Forever
+images,thor4,film,Thor: Love and Thunder
+images,ant3,film,Ant-Man et la Guêpe : Quantumania
+images,gotg3,film,Les Gardiens de la Galaxie Vol. 3
+images,marvels,film,The Marvels
+images,dpw,film,Deadpool & Wolverine
+images,cap4,film,Captain America: Brave New World
+images,bolts,film,Thunderbolts*
+images,ff,film,Les 4 Fantastiques : Premiers pas
+images,sm4,film,Spider-Man: Brand New Day
+images,av5,film,Avengers: Doomsday
+images,av6,film,Avengers: Secret Wars
+images,eow,anim,Eyes of Wakanda
+images,groot,anim,Je s’appelle Groot
+images,dd1,serie,"Daredevil, saison 1"
+images,jj1,serie,"Jessica Jones, saison 1"
+images,dd2,serie,"Daredevil, saison 2"
+images,lc1,serie,"Luke Cage, saison 1"
+images,if1,serie,"Iron Fist, saison 1"
+images,def,serie,The Defenders
+images,pun1,serie,"The Punisher, saison 1"
+images,jj2,serie,"Jessica Jones, saison 2"
+images,lc2,serie,"Luke Cage, saison 2"
+images,if2,serie,"Iron Fist, saison 2"
+images,dd3,serie,"Daredevil, saison 3"
+images,pun2,serie,"The Punisher, saison 2"
+images,jj3,serie,"Jessica Jones, saison 3"
+images,loki1,serie,"Loki, saison 1"
+images,whatif1,anim,"What If…?, saison 1"
+images,zombies,anim,Marvel Zombies
+images,wanda,serie,WandaVision
+images,fatws,serie,Falcon et le Soldat de l’Hiver
+images,hawkeye,serie,Hawkeye
+images,moon,serie,Moon Knight
+images,echo,serie,Echo
+images,shehulk,serie,She-Hulk : Avocate
+images,msmarvel,serie,Miss Marvel
+images,ironheart,serie,Ironheart
+images,wbn,special,Werewolf by Night
+images,gotghs,special,Les Gardiens de la Galaxie : Joyeuses Fêtes
+images,secretinv,serie,Secret Invasion
+images,loki2,serie,"Loki, saison 2"
+images,whatif2,anim,"What If…?, saison 2"
+images,agatha,serie,Agatha All Along
+images,whatif3,anim,"What If…?, saison 3"
+images,ddba1,serie,"Daredevil: Born Again, saison 1"
+images,wonder,serie,Wonder Man
+images,ddba2,serie,"Daredevil: Born Again, saison 2"
+images,punolk,special,The Punisher: One Last Kill
+images,vision,serie,VisionQuest
+images/personnages,ironman,personnage,Iron Man
+images/personnages,cap,personnage,Captain America
+images/personnages,thor,personnage,Thor
+images/personnages,hulk,personnage,Hulk
+images/personnages,widow,personnage,Black Widow
+images/personnages,hawk,personnage,Hawkeye
+images/personnages,spider,personnage,Spider-Man
+images/personnages,strange,personnage,Doctor Strange
+images/personnages,panther,personnage,Black Panther
+images/personnages,cmarvel,personnage,Captain Marvel
+images/personnages,antman,personnage,Ant-Man
+images/personnages,wasp,personnage,La Guêpe
+images/personnages,wanda,personnage,Wanda Maximoff
+images/personnages,vision,personnage,Vision
+images/personnages,sam,personnage,Sam Wilson
+images/personnages,bucky,personnage,Bucky Barnes
+images/personnages,rhodey,personnage,War Machine
+images/personnages,starlord,personnage,Star-Lord
+images/personnages,gamora,personnage,Gamora
+images/personnages,rocket,personnage,Rocket
+images/personnages,groot,personnage,Groot
+images/personnages,drax,personnage,Drax
+images/personnages,nebula,personnage,Nébula
+images/personnages,shangchi,personnage,Shang-Chi
+images/personnages,yelena,personnage,Yelena Belova
+images/personnages,shuri,personnage,Shuri
+images/personnages,kamala,personnage,Miss Marvel
+images/personnages,deadpool,personnage,Deadpool
+images/personnages,wolverine,personnage,Wolverine
+images/personnages,reed,personnage,Mr Fantastique
+images/personnages,sue,personnage,La Femme Invisible
+images/personnages,fury,personnage,Nick Fury
+images/personnages,loki,personnage,Loki
+images/personnages,wong,personnage,Wong
+images/personnages,valkyrie,personnage,Valkyrie
+images/personnages,daredevil,personnage,Daredevil
+images/personnages,thanos,personnage,Thanos
+images/personnages,ultron,personnage,Ultron
+images/personnages,killmonger,personnage,Killmonger
+images/personnages,hela,personnage,Hela
+images/personnages,doom,personnage,Docteur Fatalis

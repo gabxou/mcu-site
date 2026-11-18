@@ -82,7 +82,7 @@ main{overflow-x:clip}
 @media (max-width:900px){.brand-n{display:none}}
 .me span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:16ch}
 .av{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none;background:var(--panel2);box-shadow:0 0 0 1px var(--line2)}
-.av.ini{display:grid;place-items:center;font-size:.72rem;font-weight:750;color:var(--tx)}
+.av.ini{display:grid;place-items:center;font-size:.72rem;font-weight:750;font-style:normal;color:var(--tx)}
 
 /* ---------- Barre du bas (mobile) ---------- */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;grid-template-columns:repeat(5,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:var(--barbg);-webkit-backdrop-filter:saturate(170%) blur(18px);backdrop-filter:saturate(170%) blur(18px);border-top:1px solid var(--line)}
@@ -264,12 +264,28 @@ main{overflow-x:clip}
 .legal{display:grid;gap:24px;max-width:72ch;color:var(--tx2)}
 .legal h2{font-size:1.1rem;font-weight:750;font-stretch:110%;color:var(--tx);margin-bottom:6px}
 .legal p + p{margin-top:10px}
+.legal{counter-reset:art}
+.legal > div > h2::before{counter-increment:art;content:counter(art) ". "}
 .legal a,.acct a{color:var(--tx);text-underline-offset:3px}
 .contact-f{display:grid;gap:14px;margin-top:14px;max-width:34em}
 .contact-f label{display:grid;gap:6px;font-size:.92rem;font-weight:650;color:var(--tx2)}
 .contact-f input{padding:.6em 1em;border-radius:12px;border:1px solid var(--line2);background:rgba(16,2,4,.5);font-weight:400}
 .contact-f textarea{margin-top:0;font-weight:400}
 .contact-more{white-space:pre-wrap;overflow-wrap:anywhere}
+.acct-part{display:contents}
+.acct-id > div{min-width:0}
+.acct-id p,.gr-n{overflow-wrap:anywhere}
+.acct .fine{font-size:.86rem;color:var(--tx3)}
+.acct .warn,.acct .auth-msg{font-size:.92rem;font-weight:600;color:var(--gold)}
+.acct .auth-msg.is-ok{color:var(--tx)}
+.auth{display:grid;gap:16px;max-width:34em}
+.acct form.contact-f{margin-top:0}
+.acct form input{font-size:1rem}
+.contact-f input:-webkit-autofill{-webkit-text-fill-color:var(--tx);caret-color:var(--tx);box-shadow:0 0 0 100px #2A0508 inset}
+.acct .auth-or{display:flex;align-items:center;gap:12px;font-size:.86rem;color:var(--tx3)}
+.auth-or::before,.auth-or::after{content:"";flex:1;height:1px;background:var(--line)}
+.auth-alt{display:grid;gap:8px}
+.auth-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
 .sitefoot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:clamp(40px,6vw,72px);padding:18px 0 6px;border-top:1px solid var(--line);color:var(--tx3);font-size:.86rem}
 .sitefoot nav{display:flex;flex-wrap:wrap;gap:6px 22px}
 .sitefoot a{color:var(--tx2);text-underline-offset:3px}
@@ -409,6 +425,7 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
 .gr-d{color:var(--tx3);font-size:.82rem}
 .gr-c{margin-top:4px;color:var(--tx2);white-space:pre-wrap;overflow-wrap:anywhere}
 .muted{color:var(--tx3)}
+.gr + .muted{margin-top:14px}
 .pchips{display:flex;flex-wrap:wrap;gap:8px}
 .pchip{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:650;font-size:.9rem;cursor:pointer}
 .pchip:hover{border-color:var(--line2)}
@@ -560,13 +577,15 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
       <p>Dernière mise à jour : novembre 2026.</p>
     </header>
     <div class="legal">
-      <div><h2>1. Objet du site</h2><p>Ce site est un site de fans, non officiel. Il permet de suivre les films et les séries de l’univers Marvel dans l’ordre de leur histoire, de les noter, de les commenter et de les classer. Il n’est ni affilié à Marvel ou à Disney, ni approuvé par eux.</p></div>
-      <div><h2>2. Accès</h2><p>L’accès au site est gratuit. Le site est proposé en l’état : il peut évoluer, être interrompu ou être fermé à tout moment, sans préavis. Les informations présentées, notamment l’ordre et les époques des histoires, sont données à titre indicatif.</p></div>
-      <div><h2>3. Vos notes et vos données</h2><p>Il n’y a ni inscription, ni compte, ni mot de passe. Vos notes, vos commentaires et votre tier list sont enregistrés uniquement dans votre navigateur, sur votre appareil. Ils ne sont pas transmis au responsable du site et ne sont visibles par personne d’autre.</p><p>Vous pouvez les modifier ou les effacer à tout moment depuis les fiches, en télécharger une copie depuis la page <a href="#compte">Compte</a>, ou tout supprimer en effaçant les données du site dans votre navigateur.</p><p>Le site n’utilise ni cookie, ni publicité, ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes et vos réglages d’affichage.</p></div>
-      <div><h2>4. Hébergement et services tiers</h2><p>Le site est hébergé par GitHub Pages, un service de GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, États-Unis. Comme tout hébergeur, GitHub reçoit l’adresse IP des visiteurs pour leur transmettre les pages.</p><p>La police de caractères est fournie par Google Fonts, un service de Google, qui reçoit lui aussi l’adresse IP de votre appareil au moment de son chargement.</p></div>
-      <div><h2>5. Propriété intellectuelle</h2><p>Marvel, les titres des films et des séries ainsi que les noms des personnages appartiennent à leurs détenteurs respectifs. Ils ne sont cités ici que pour désigner les œuvres concernées. Les textes de présentation et l’habillage du site ont été créés pour lui.</p><p>Les éventuelles images d’illustration restent la propriété de leurs auteurs. Tout détenteur de droits qui souhaite le retrait d’un contenu peut en faire la demande depuis la page <a href="#contact">Contact</a> ; il sera retiré dans les meilleurs délais.</p></div>
-      <div><h2>6. Responsabilité</h2><p>Le responsable du site ne peut être tenu pour responsable d’une erreur dans les informations présentées, d’une interruption du service ou d’une perte des notes enregistrées dans votre navigateur.</p></div>
-      <div><h2>7. Éditeur et contact</h2><p>Le site est édité par la personne indiquée sur la page <a href="#contact">Contact</a>. Pour toute question ou demande concernant le site, écrivez à l’adresse qui y figure.</p></div>
+      <div><h2>Objet du site</h2><p>Ce site est un site de fans, non officiel. Il permet de suivre les films et les séries de l’univers Marvel dans l’ordre de leur histoire, de les noter, de les commenter et de les classer<span data-if="acct" hidden>, et de lire les avis des autres personnes inscrites</span>. Il n’est ni affilié à Marvel ou à Disney, ni approuvé par eux.</p></div>
+      <div><h2>Accès</h2><p>L’accès au site est gratuit. Le site est proposé en l’état : il peut évoluer, être interrompu ou être fermé à tout moment, sans préavis. Les informations présentées, notamment l’ordre et les époques des histoires, sont données à titre indicatif.</p></div>
+      <div data-if="noacct"><h2>Vos notes et vos données</h2><p>Il n’y a ni inscription, ni compte, ni mot de passe. Vos notes, vos commentaires et votre tier list sont enregistrés uniquement dans votre navigateur, sur votre appareil. Ils ne sont pas transmis au responsable du site et ne sont visibles par personne d’autre.</p><p>Vous pouvez les modifier ou les effacer à tout moment depuis les fiches, en télécharger une copie depuis la page <a href="#compte">Compte</a>, ou tout supprimer en effaçant les données du site dans votre navigateur.</p><p>Le site n’utilise ni cookie, ni publicité, ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes et vos réglages d’affichage.</p></div>
+      <div data-if="acct" hidden><h2>Compte, notes et données</h2><p>Vous pouvez utiliser le site sans compte : vos notes, vos commentaires et votre tier list restent alors uniquement dans votre navigateur, sur votre appareil.</p><p>Vous pouvez aussi créer un compte avec une adresse e-mail et un mot de passe, ou avec un compte Google ou Apple lorsque le site le propose. Le site enregistre alors votre adresse e-mail, votre pseudo, vos notes, vos commentaires et votre tier list, afin de vous les rendre sur tous vos appareils. Votre mot de passe est géré par le service de comptes : le responsable du site n’y a pas accès.</p><p>Vos notes, vos commentaires, votre tier list et votre pseudo sont visibles par les autres personnes inscrites. Votre adresse e-mail ne leur est jamais montrée.</p><p>Vous pouvez modifier ou effacer vos avis à tout moment depuis les fiches, en télécharger une copie et supprimer votre compte depuis la page <a href="#compte">Compte</a> : vos données sont alors effacées. Vous pouvez aussi demander l’accès à vos données, leur correction ou leur effacement en écrivant à l’adresse de la page <a href="#contact">Contact</a>.</p><p>Le site n’utilise ni publicité ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes, vos réglages d’affichage et votre connexion.</p></div>
+      <div data-if="acct" hidden><h2>Contenus que vous publiez</h2><p>Vos commentaires, votre tier list et votre pseudo sont lus par les autres personnes inscrites : vous en êtes responsable. Sont interdits les contenus illicites, injurieux, haineux ou portant atteinte aux droits d’autrui, ainsi que la publicité et l’usurpation d’identité.</p><p>Le responsable du site peut retirer un contenu ou fermer un compte qui ne respecte pas ces règles. Pour signaler un contenu, écrivez à l’adresse indiquée sur la page <a href="#contact">Contact</a>.</p></div>
+      <div><h2>Hébergement et services tiers</h2><p>Le site est hébergé par GitHub Pages, un service de GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, États-Unis. Comme tout hébergeur, GitHub reçoit l’adresse IP des visiteurs pour leur transmettre les pages.</p><p>La police de caractères est fournie par Google Fonts, un service de Google, qui reçoit lui aussi l’adresse IP de votre appareil au moment de son chargement.</p><p data-if="acct" hidden>Les comptes et les données qui s’y rattachent sont gérés avec Firebase, un service de Google. Google traite ces données pour le compte du responsable du site, y compris en dehors de l’Union européenne, notamment aux États-Unis, et reçoit l’adresse IP de votre appareil à chaque connexion.</p></div>
+      <div><h2>Propriété intellectuelle</h2><p>Marvel, les titres des films et des séries ainsi que les noms des personnages appartiennent à leurs détenteurs respectifs. Ils ne sont cités ici que pour désigner les œuvres concernées. Les textes de présentation et l’habillage du site ont été créés pour lui.</p><p>Les éventuelles images d’illustration restent la propriété de leurs auteurs. Tout détenteur de droits qui souhaite le retrait d’un contenu peut en faire la demande depuis la page <a href="#contact">Contact</a> ; il sera retiré dans les meilleurs délais.</p></div>
+      <div><h2>Responsabilité</h2><p>Le responsable du site ne peut être tenu pour responsable d’une erreur dans les informations présentées, d’une interruption du service ou d’une perte des notes enregistrées.</p></div>
+      <div><h2>Éditeur et contact</h2><p>Le site est édité par la personne indiquée sur la page <a href="#contact">Contact</a>. Pour toute question ou demande concernant le site, écrivez à l’adresse qui y figure.</p></div>
     </div>
   </section>
 
@@ -793,6 +812,8 @@ const pad = n => String(n).padStart(2, '0');
 const fmtR = r => String(Math.round(r * 10) / 10).replace('.', ',');
 const fmtD = m => m ? `${Math.floor(m / 60)}\u00a0h\u00a0${pad(m % 60)}` : '';
 const num = v => (typeof v === 'number' && isFinite(v)) ? v : 0;
+/* Horodatage d’un changement : toujours plus récent que le précédent, même si l’horloge de l’appareil retarde. */
+const stamp = t => Math.max(Date.now(), num(t) + 1);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const norm = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 const dateOf = iso => new Date(iso + 'T00:00:00');
@@ -842,6 +863,9 @@ const ICON = {
    ===================================================================== */
 const S = {
   view:'films', mode:'boot', shareRead:false, slow:false, save:'idle',
+  /* be : service de comptes en place ('firebase' ; 'claude' sur l’ancien hébergement). social : état des avis des inscrits. */
+  be:null, social:'off', deleting:false, nickDirty:false,
+  auth:{ready:false, fail:false, user:null, tab:'in', busy:'', msg:'', ok:'', confirm:'', force:false, fresh:null},
   me:{key:null, id:null, name:'', avatar:'', isOwner:false},
   gridStars:'me', fAll:'tout', charG:'tous', charQ:'', tierWho:'me', tierSel:null,
   fview:'line', stripAuto:true, advSeen:null, admin:false,
@@ -1027,7 +1051,7 @@ const avatarHTML = w => w.avatar
 function setRev(id, patch){
   const doc = myDoc();
   const cur = doc.films[id] || {r:0, c:'', s:false, t:0};
-  const next = Object.assign({}, cur, patch, {t: Date.now()});
+  const next = Object.assign({}, cur, patch, {t: stamp(cur.t)});
   if (patch.r > 0) next.s = true;
   doc.films[id] = next;
   if (S.mode === 'boot') S.bootEdits.add(id);
@@ -1040,11 +1064,13 @@ function moveTile(id, tier, index){
     const arr = d.rows[tier];
     arr.splice(index == null ? arr.length : Math.max(0, Math.min(arr.length, index)), 0, id);
   }
-  d.t = Date.now();
+  d.t = stamp(d.t);
   if (S.mode === 'boot') S.bootTier = true;
   commit('tiers');
 }
-const W = {reviews:{busy:false, dirty:false}, tiers:{busy:false, dirty:false}};
+/* busy : écriture en cours. dirty : changement à envoyer. synced : document déjà lu sur le serveur (comptes Firebase). */
+const W = {reviews:{busy:false, dirty:false, synced:false}, tiers:{busy:false, dirty:false, synced:false}};
+function resetW(){ for (const k of ['reviews', 'tiers']) W[k] = {busy:false, dirty:false, synced:false}; }
 function commit(kind){
   if (!shared()){
     S.save = saveLocal() ? 'local' : 'error';
@@ -1052,6 +1078,7 @@ function commit(kind){
     return;
   }
   W[kind].dirty = true;
+  saveMirror();
   pump(kind);
 }
 function outDoc(kind){
@@ -1065,12 +1092,20 @@ function outDoc(kind){
 async function pump(kind){
   const w = W[kind];
   if (w.busy) return;
+  /* Compte Firebase : rien ne part avant d’avoir lu le document sur le serveur, pour ne pas écraser
+     ce qu’un autre appareil y a mis. D’ici là, la copie locale garde le changement. */
+  if (S.be === 'firebase' && (!API.db || !w.synced)){
+    if (shared() && w.dirty){ S.save = 'queued'; paintSave(); }
+    return;
+  }
   w.busy = true;
   S.save = 'saving'; paintSave();
-  while (w.dirty && shared()){
+  while (w.dirty && shared() && !S.deleting){
     w.dirty = false;
-    const ref = API.db.doc(kind + '/' + S.me.key);
+    const key = S.me.key;
+    const ref = API.db.doc(kind + '/' + key);
     const body = outDoc(kind);
+    const late = setTimeout(() => { if (W[kind] === w && w.busy){ S.save = 'queued'; paintSave(); } }, 5000);
     let err = null;
     try{ await ref.set(body); }
     catch(e){
@@ -1080,10 +1115,17 @@ async function pump(kind){
         try{ await ref.set(body); err = null; }catch(e2){ err = e2 || {}; }
       }
     }
+    clearTimeout(late);
+    if (W[kind] !== w || S.me.key !== key) break;   /* compte quitté pendant l’envoi */
     if (err){ demote(err); break; }
+    if (kind === 'reviews' && !w.dirty) S.nickDirty = false;
   }
   w.busy = false;
-  if (shared()){ S.save = 'saved'; paintSave(); }
+  if (W[kind] === w && shared() && !w.dirty){
+    S.save = 'saved'; paintSave();
+    /* Tout est parti : l’avertissement affiché avant une déconnexion n’a plus lieu d’être. */
+    if (S.auth.force && settled()){ S.auth.force = false; if (S.view === 'compte') renderAccount(); }
+  }
 }
 /* L’écriture partagée est refusée : on garde tout sur l’appareil pour le reste de la visite. */
 function demote(err){
@@ -1098,9 +1140,17 @@ function demote(err){
   delete D.st[S.me.key];
   S.mode = 'local';
   S.save = saveLocal() ? 'local' : 'error';
-  toast(err && err.code === 'quota_exceeded'
-    ? 'L’espace du groupe est plein. Ton avis est gardé sur cet appareil.'
-    : 'Ton accès ne permet pas de publier. Ton avis est gardé sur cet appareil.');
+  if (S.be === 'firebase'){
+    W.reviews.dirty = W.tiers.dirty = false;
+    dropMirror();
+    toast(err && err.code === 'resource-exhausted'
+      ? 'Le site a atteint sa limite pour aujourd’hui. Tes notes restent sur cet appareil.'
+      : 'L’enregistrement sur ton compte n’a pas marché. Tes notes restent sur cet appareil.');
+  } else {
+    toast(err && err.code === 'quota_exceeded'
+      ? 'L’espace du groupe est plein. Ton avis est gardé sur cet appareil.'
+      : 'Ton accès ne permet pas de publier. Ton avis est gardé sur cet appareil.');
+  }
   render();
 }
 
@@ -1186,12 +1236,243 @@ function subscribe(){
     }, () => {});
   }catch(e){ onErr(); }
 }
-async function boot(){
+/* =====================================================================
+   Comptes : Firebase Authentication et Cloud Firestore
+   ===================================================================== */
+const FB = {a:null, fs:null, app:null, auth:null, db:null, user:null, unsub:[]};
+const ACCT = 'marathon.acct';
+const within = (p, ms) => Promise.race([p, new Promise((_, no) => setTimeout(() => no({code:'timeout'}), ms))]);
+const settled = () => !W.reviews.busy && !W.reviews.dirty && !W.tiers.busy && !W.tiers.dirty;
+async function flush(ms){
+  const end = Date.now() + ms;
+  while (!settled() && Date.now() < end) await sleep(120);
+  return settled();
+}
+/* Copie locale du compte ouvert : elle s’affiche dès l’arrivée sur la page et garde ce qui n’a pas
+   encore pu partir. Elle est effacée à la déconnexion. */
+function loadMirror(){
+  try{
+    const o = JSON.parse(localStorage.getItem(ACCT) || 'null');
+    if (o && typeof o.uid === 'string' && /^[\w-]{1,128}$/.test(o.uid)) return {uid:o.uid, r:cleanReviewDoc(o.r), t:cleanTierDoc(o.t)};
+  }catch(e){}
+  return null;
+}
+function saveMirror(){
+  if (S.be !== 'firebase' || !shared()) return;
+  const k = S.me.key;
+  try{ localStorage.setItem(ACCT, JSON.stringify({v:1, uid:k, r:D.sr[k] || null, t:D.st[k] || null})); }catch(e){}
+}
+function dropMirror(){ try{ localStorage.removeItem(ACCT); }catch(e){} }
+function enterAccount(uid, seed){
+  S.me = {key:uid, id:uid, name:'', avatar:'', isOwner:false};
+  D.sr = {}; D.st = {}; D.prof = {};
+  if (seed){ D.sr[uid] = seed.r; D.st[uid] = seed.t; }
+  resetW();
+  S.mode = 'shared'; S.shareRead = true; S.social = 'wait'; S.slow = false; S.save = 'idle'; S.nickDirty = false;
+}
+function stopListening(){ FB.unsub.splice(0).forEach(f => { try{ f(); }catch(e){} }); }
+function leaveAccount(){
+  stopListening();
+  resetW();
+  D.sr = {}; D.st = {}; D.prof = {};
+  S.me = {key:null, id:null, name:'', avatar:'', isOwner:false};
+  S.mode = 'local'; S.shareRead = false; S.social = 'off'; S.slow = false; S.save = 'idle'; S.nickDirty = false;
+  S.tierWho = 'me'; S.gridStars = 'me'; S.tierSel = null;
+  dropMirror();
+}
+function userInfo(u){
+  const p = (u.providerData || []).map(x => x && x.providerId).filter(Boolean);
+  return {uid:u.uid, email:u.email || '', verified:!!u.emailVerified, prov: p.includes('password') ? 'password' : (p[0] || 'password')};
+}
+const AUTH_TEXT = {
+  'auth/invalid-email':'Cette adresse e-mail n’a pas la bonne forme.',
+  'auth/missing-email':'Cette adresse e-mail n’a pas la bonne forme.',
+  'auth/missing-password':'Écris ton mot de passe.',
+  'auth/invalid-credential':'E-mail ou mot de passe incorrect.',
+  'auth/wrong-password':'E-mail ou mot de passe incorrect.',
+  'auth/user-not-found':'E-mail ou mot de passe incorrect.',
+  'auth/email-already-in-use':'Un compte existe déjà avec cette adresse. Connecte-toi, ou utilise « Mot de passe oublié ».',
+  'auth/weak-password':'Ce mot de passe est trop court ou trop simple. Choisis-en un d’au moins 8 caractères.',
+  'auth/password-does-not-meet-requirements':'Ce mot de passe est trop court ou trop simple. Choisis-en un d’au moins 8 caractères.',
+  'auth/too-many-requests':'Trop d’essais. Réessaie dans quelques minutes.',
+  'auth/network-request-failed':'Pas de connexion. Vérifie ton accès à Internet, puis réessaie.',
+  'auth/popup-blocked':'Ton navigateur a bloqué la fenêtre de connexion. Autorise-la pour ce site, ou utilise ton e-mail.',
+  'auth/popup-closed-by-user':'',
+  'auth/cancelled-popup-request':'',
+  'auth/user-cancelled':'',
+  'auth/operation-not-allowed':'Ce mode de connexion n’est pas activé sur le site.',
+  'auth/unauthorized-domain':'Ce site n’est pas encore autorisé à utiliser la connexion.',
+  'auth/user-disabled':'Ce compte a été désactivé.',
+  'auth/account-exists-with-different-credential':'Un compte existe déjà avec cette adresse, avec un autre mode de connexion. Connecte-toi comme la première fois.',
+  'auth/requires-recent-login':'Par sécurité, reconnecte-toi, puis recommence.',
+  'auth/user-token-expired':'Ta session a expiré. Reconnecte-toi.',
+  'auth/user-mismatch':'Ce n’est pas le compte ouvert sur ce site.'
+};
+const authText = e => { const c = (e && e.code) || ''; return c in AUTH_TEXT ? AUTH_TEXT[c] : 'Ça n’a pas marché. Réessaie dans un instant.'; };
+function provider(kind){
+  if (kind === 'apple' || kind === 'apple.com'){
+    const p = new FB.a.OAuthProvider('apple.com');
+    p.addScope('email'); p.addScope('name');
+    p.setCustomParameters({locale:'fr'});
+    return p;
+  }
+  const p = new FB.a.GoogleAuthProvider();
+  p.setCustomParameters({prompt:'select_account'});
+  return p;
+}
+/* Mon document, tel que le serveur le donne. Film par film, le plus récent l’emporte ; si la mémoire
+   est en avance (changement pas encore parti, ou fait hors ligne), il repart vers le serveur. */
+function applyMine(kind, uid, snap){
+  if (S.me.key !== uid || !shared() || S.deleting) return;
+  const server = !snap.metadata.fromCache;
+  const raw = snap.exists() ? snap.data() : null;
+  const w = W[kind];
+  let ahead = false;
+  if (kind === 'reviews'){
+    const rem = cleanReviewDoc(raw), mem = D.sr[uid];
+    if (mem){
+      for (const id of Object.keys(mem.films)){
+        const a = mem.films[id], b = rem.films[id];
+        if (!b || a.t > b.t){ rem.films[id] = a; ahead = true; }
+      }
+      if (mem.nick && mem.nick !== rem.nick && (S.nickDirty || !rem.nick)){ rem.nick = mem.nick; ahead = true; }
+    }
+    D.sr[uid] = rem;
+  } else {
+    const rem = cleanTierDoc(raw), mem = D.st[uid];
+    if (mem && mem.t > rem.t) ahead = true; else D.st[uid] = rem;
+  }
+  if (server){
+    w.synced = true;
+    if (ahead) w.dirty = true;
+  }
+  saveMirror();
+  if (w.synced && w.dirty) pump(kind);
+  afterData();
+}
+/* Les documents des autres inscrits : les profils les plus récemment actifs. */
+function applyOthers(kind, uid, snap){
+  if (S.me.key !== uid) return;
+  const isRev = kind === 'reviews', cur = isRev ? D.sr : D.st, next = {};
+  if (cur[uid]) next[uid] = cur[uid];
+  for (const d of snap.docs){
+    if (d.id === uid) continue;
+    const v = d.data();
+    if (v) next[d.id] = isRev ? cleanReviewDoc(v) : cleanTierDoc(v);
+  }
+  if (isRev) D.sr = next; else D.st = next;
+  afterData();
+}
+function listenAccount(uid){
+  stopListening();
+  const fs = FB.fs, db = FB.db;
+  S.shareRead = true;
+  if (S.social !== 'on') S.social = 'wait';
+  let fresh = false;
+  const timer = setTimeout(() => { if (!fresh && S.me.key === uid){ S.slow = true; render(); } }, 10000);
+  const settle = () => { if (fresh) return; fresh = true; clearTimeout(timer); S.slow = false; };
+  /* Mon document ne se lit pas ou ne s’écrit pas : tout reste sur l’appareil. */
+  const mineErr = e => { if (S.me.key !== uid) return; settle(); if (shared()) demote(e || {}); else render(); };
+  const othersErr = () => { if (S.me.key !== uid) return; S.shareRead = false; S.social = 'off'; render(); };
+  const top = name => fs.query(fs.collection(db, name), fs.orderBy('t', 'desc'), fs.limit(FEED_MAX));
+  /* includeMetadataChanges : être prévenu quand le serveur confirme, même si rien n’a changé. */
+  const opt = {includeMetadataChanges:true};
+  FB.unsub.push(() => clearTimeout(timer));
+  try{
+    FB.unsub.push(
+      fs.onSnapshot(fs.doc(db, 'reviews', uid), opt, s => { if (!s.metadata.fromCache) settle(); applyMine('reviews', uid, s); }, mineErr),
+      fs.onSnapshot(fs.doc(db, 'tiers', uid), opt, s => applyMine('tiers', uid, s), mineErr),
+      fs.onSnapshot(top('reviews'), s => { S.social = 'on'; applyOthers('reviews', uid, s); }, othersErr),
+      fs.onSnapshot(top('tiers'), s => applyOthers('tiers', uid, s), othersErr)
+    );
+  }catch(e){ mineErr(e); }
+}
+/* Nouveau compte : le pseudo choisi et ce qui était noté sur l’appareil y sont rangés d’office. */
+function settleFresh(){
+  const f = S.auth.fresh;
+  if (!f || !shared() || !FB.user || S.me.key !== FB.user.uid) return;
+  S.auth.fresh = null;
+  if (f.nick && !myDoc().nick){ myDoc().nick = f.nick; S.nickDirty = true; }
+  importLocal(true);
+}
+function welcome(extra){ S.auth.fresh = extra || {}; settleFresh(); }
+function onAuth(user){
+  const a = S.auth, acted = Date.now() - (a.at || 0) < 5000;
+  a.ready = true; a.fail = false;
+  FB.user = user || null;
+  a.user = user ? userInfo(user) : null;
+  if (!user){
+    if (S.me.key) leaveAccount();
+    a.confirm = ''; a.force = false; S.deleting = false;
+    if (a.busy === 'out' || a.busy === 'delete') a.busy = '';
+  } else {
+    if (S.me.key !== user.uid){ if (S.me.key) leaveAccount(); enterAccount(user.uid, null); }
+    a.tab = 'in';
+    listenAccount(user.uid);
+    settleFresh();
+  }
+  render();
+  if (acted && S.view === 'compte' && (!document.activeElement || document.activeElement === document.body)){
+    const n = $('#account .acct-n');
+    if (n) n.focus({preventScroll:true});
+  }
+}
+async function startFirebase(){
+  /* Le service tarde ou ne répond pas : on le dit, sans bloquer le site. */
+  const guard = setTimeout(() => { if (!S.auth.ready){ S.auth.fail = true; render(); } }, 12000);
+  try{
+    const [appM, authM, fsM] = await Promise.all(['app', 'auth', 'firestore'].map(n => import(FB_SDK + 'firebase-' + n + '.js')));
+    FB.a = authM; FB.fs = fsM;
+    FB.app = appM.initializeApp(FIREBASE);
+    FB.auth = authM.getAuth(FB.app);
+    FB.auth.languageCode = 'fr';
+    FB.db = fsM.getFirestore(FB.app);
+    /* Écriture en fusion : ce qu’un autre appareil vient d’ajouter n’est pas effacé.
+       Une table de films vide remplacerait celle du serveur : on ne l’envoie pas. */
+    API.db = {doc: path => ({set: body => {
+      if (body.films && !Object.keys(body.films).length) delete body.films;
+      return fsM.setDoc(fsM.doc(FB.db, path), body, {merge:true});
+    }})};
+    authM.onAuthStateChanged(FB.auth, u => { clearTimeout(guard); onAuth(u); });
+  }catch(e){
+    clearTimeout(guard);
+    S.auth.fail = true;
+    render();
+  }
+}
+/* L’adresse vient peut-être d’être confirmée dans un autre onglet. */
+let verifT = 0;
+function refreshVerified(){
+  const u = FB.user, i = S.auth.user;
+  if (!u || !i || i.verified || i.prov !== 'password' || Date.now() - verifT < 15000) return;
+  verifT = Date.now();
+  u.reload().then(() => { if (FB.user === u){ S.auth.user = userInfo(u); render(); } }).catch(() => {});
+}
+/* Les CGU ont deux variantes : avec ou sans comptes. */
+function flagAccounts(on){ $$('[data-if]').forEach(el => { el.hidden = (el.dataset.if === 'acct') !== on; }); }
+
+function boot(){
   const c = window.claude;
-  if (!c || typeof c.use !== 'function'){ S.mode = 'local'; const cached = artCache(); render(); probeArt(cached); return; }
+  if (c && typeof c.use === 'function'){ bootClaude(c); return; }
+  const cached = artCache();
+  S.mode = 'local';
+  if (FIREBASE.apiKey){
+    S.be = 'firebase';
+    flagAccounts(true);
+    /* Compte déjà ouvert sur cet appareil : sa copie s’affiche sans attendre le service. */
+    const m = loadMirror();
+    if (m) enterAccount(m.uid, m);
+    startFirebase();
+  }
+  render();
+  probeArt(cached);
+}
+/* Ancien hébergement, dans Claude : conservé tel quel. */
+async function bootClaude(c){
   let db = null, user = null, assets = null, me = null, canWrite = null;
   try{ [db, user, assets] = await Promise.all([c.use('db'), c.use('user'), c.use('assets')]); }catch(e){}
   API.db = db; API.user = user; API.assets = db ? assets : null;
+  if (db) S.be = 'claude';
   if (user){
     try{ me = await user.me(); canWrite = await user.can('data.write'); S.admin = !!(db && await user.canEdit()); }catch(e){}
   }
@@ -1270,12 +1551,14 @@ function paintChrome(){
   const seen = rel.filter(f => isSeen(f.id)).length;
   $('#ring-p').setAttribute('stroke-dasharray', `${rel.length ? Math.round(seen / rel.length * 100) : 0} 100`);
   const nm = S.me.name || (shared() ? (myDoc().nick || '') : '');
+  const inAcct = S.be === 'firebase' && (shared() || !!S.auth.user);
   $('#me').innerHTML = (S.me.avatar && (S.me.id || nm))
     ? `<span>${h(nm.split(' ')[0])}</span><img class="av" src="${h(S.me.avatar)}" alt="">`
+    : inAcct ? `<span>${h(nm || 'Mon compte')}</span><i class="av ini" aria-hidden="true">${nm ? h(initials(nm)) : '?'}</i>`
     : `<span>Compte</span>${ICON.user}`;
 }
 function paintSave(){
-  const txt = {saving:'Enregistrement…', saved:'Enregistré pour le groupe', local:'Enregistré sur cet appareil', error:'Impossible d’enregistrer sur cet appareil', idle:''}[S.save] || '';
+  const txt = {saving:'Enregistrement…', saved:'Enregistré sur ton compte', queued:'Gardé sur cet appareil. Envoi vers ton compte dès que possible.', local:'Enregistré sur cet appareil', error:'Impossible d’enregistrer sur cet appareil', idle:''}[S.save] || '';
   $$('[data-save]').forEach(el => { el.textContent = txt; });
 }
 
@@ -1320,30 +1603,35 @@ function renderNextUp(){
     + `<div class="actions"><button class="btn primary" data-act="open" data-ctx="films" data-id="${f.id}">Noter ce film</button><button class="btn" data-act="seen-next" data-id="${f.id}">Je l’ai vu</button></div></div>`;
 }
 function renderNotice(){
-  const el = $('#notice');
-  if (el.contains(document.activeElement)) return;
-  const parts = [];
+  const el = $('#notice'), f = document.activeElement;
+  if (f && f.tagName === 'INPUT' && el.contains(f)) return;
+  const parts = [], fb = S.be === 'firebase';
   if (shared()){
-    if (!S.me.name && !myDoc().nick) parts.push(`<div class="note"><label for="nick">Sous quel nom tes amis verront-ils tes avis ?</label><span class="note-f"><input id="nick" class="nick-in" maxlength="24" autocomplete="nickname" placeholder="Ton prénom ou un pseudo"><button class="btn sm" data-act="save-nick">Valider</button></span></div>`);
-    const nLocal = countLive(D.lr);
-    if (nLocal) parts.push(`<div class="note"><span>${nLocal} avis ${nLocal > 1 ? 'sont enregistrés' : 'est enregistré'} sur cet appareil, hors du groupe.</span><button class="btn sm" data-act="import-local">${nLocal > 1 ? 'Les ajouter' : 'L’ajouter'} au groupe</button></div>`);
+    if (!S.me.name && !myDoc().nick) parts.push(`<div class="note"><label for="nick">Sous quel nom les autres inscrits verront-ils tes avis ?</label><span class="note-f"><input id="nick" class="nick-in" maxlength="24" autocomplete="nickname" placeholder="Ton prénom ou un pseudo"><button class="btn sm" data-act="save-nick">Valider</button></span></div>`);
+    const nLocal = countLive(D.lr), tLocal = !nLocal && hasRows(D.lt) && !hasRows(myTier());
+    if (nLocal || tLocal) parts.push(`<div class="note"><span>${nLocal ? `${nLocal} avis ${nLocal > 1 ? 'sont enregistrés' : 'est enregistré'}` : 'Une tier list est enregistrée'} sur cet appareil, hors de ton compte.</span><button class="btn sm" data-act="import-local">${nLocal > 1 ? 'Les ajouter' : 'L’ajouter'} à mon compte</button></div>`);
     if (S.me.isOwner && !otherKeys(D.sr).length && !S.slow) parts.push(`<div class="note"><span>Tu es seul ici pour l’instant. Partage la page avec tes amis : avec un accès en modification, leurs notes apparaîtront à côté des tiennes.</span></div>`);
-  } else if (S.mode === 'local' && API.db){
+  } else if (fb && S.auth.user){
+    parts.push(`<div class="note"><span>L’enregistrement sur ton compte ne marche pas pour l’instant. Tes notes restent sur cet appareil.</span><button class="btn sm" data-act="auth-resync">Réessayer</button></div>`);
+  } else if (fb && S.auth.ready && countLive(D.lr)){
+    parts.push(`<div class="note"><span>Crée un compte pour retrouver tes notes sur tous tes appareils et lire les avis des autres inscrits.</span><a class="btn sm" href="#compte" data-act="auth-tab" data-v="up">Créer un compte</a></div>`);
+  } else if (S.mode === 'local' && S.be === 'claude'){
     parts.push(`<div class="note"><span>${S.shareRead
       ? 'Tu vois les avis du groupe, mais ton accès ne permet pas d’en publier. Tes notes restent sur cet appareil.'
       : 'Les avis du groupe ne sont pas accessibles ici. Tes notes restent sur cet appareil.'}</span></div>`);
   }
-  if (S.slow) parts.push(`<div class="note"><span>Les avis du groupe tardent à arriver. Ce que tu vois n’est peut-être pas à jour.</span></div>`);
+  if (S.slow) parts.push(`<div class="note"><span>${fb ? 'Ton compte tarde à répondre. Ce que tu vois n’est peut-être pas à jour.' : 'Les avis du groupe tardent à arriver. Ce que tu vois n’est peut-être pas à jour.'}</span></div>`);
   el.innerHTML = parts.join('');
 }
 function renderFeed(){
-  const items = [];
+  /* Un avis daté dans le futur (horloge déréglée) ne passe pas devant les autres. */
+  const items = [], soon = Date.now() + 864e5;
   for (const k of otherKeys(D.sr)){
     const fm = D.sr[k].films;
-    for (const id of Object.keys(fm)){ const r = fm[id]; if (r.r > 0 || r.c) items.push({k, id, r}); }
+    for (const id of Object.keys(fm)){ const r = fm[id]; if ((r.r > 0 || r.c) && r.t <= soon) items.push({k, id, r}); }
   }
   items.sort((a, b) => b.r.t - a.r.t);
-  $('#feed').innerHTML = !items.length ? '' : `<section class="feed"><h2 class="feed-h">Derniers avis du groupe</h2><div class="feed-s">`
+  $('#feed').innerHTML = !items.length ? '' : `<section class="feed"><h2 class="feed-h">Derniers avis des inscrits</h2><div class="feed-s">`
     + items.slice(0, 8).map(o => {
         const x = byId.get(o.id), w = who(o.k);
         return `<button class="fi" data-act="open" data-ctx="${x.k === 'film' ? 'films' : 'all'}" data-id="${x.id}">`
@@ -1359,7 +1647,7 @@ function renderGridBar(){
   $('#gridbar').innerHTML = `<h2>Les films, dans l’ordre</h2><div class="gridbar-r">`
     + (!has ? '' : `<div class="seg2" role="group" aria-label="Notes affichées sous les films">`
       + `<button data-act="gstars" data-v="me" aria-pressed="${S.gridStars === 'me'}">Mes notes</button>`
-      + `<button data-act="gstars" data-v="group" aria-pressed="${S.gridStars === 'group'}">Moyenne du groupe</button></div>`)
+      + `<button data-act="gstars" data-v="group" aria-pressed="${S.gridStars === 'group'}">Moyenne des inscrits</button></div>`)
     + `<div class="seg2" role="group" aria-label="Disposition des films">`
     + `<button data-act="fview" data-v="line" aria-pressed="${S.fview === 'line'}">En ligne</button>`
     + `<button data-act="fview" data-v="grid" aria-pressed="${S.fview === 'grid'}">Tout afficher</button></div></div>`;
@@ -1430,31 +1718,109 @@ function renderAdv(){
 }
 
 /* ---------- Compte ---------- */
+/* Ne redessine un bloc que si son contenu change, et jamais pendant une saisie : un mot de passe en
+   cours de frappe n’est pas effacé par l’arrivée d’un avis. Une clé différente force le dessin. */
+function setHTML(el, html, key){
+  if (el.__h === html && el.__k === key) return;
+  const f = document.activeElement;
+  if (el.__k === key && f && el.contains(f) && /^(INPUT|TEXTAREA)$/.test(f.tagName)) return;
+  el.innerHTML = html; el.__h = html; el.__k = key;
+}
+function authHTML(){
+  const a = S.auth, up = a.tab === 'up';
+  if (a.fail) return `<div><h2>Comptes indisponibles</h2><p>Le service de comptes ne répond pas pour l’instant. Tes notes restent sur cet appareil.</p><div class="acct-f"><button class="btn sm" data-act="reload">Recharger la page</button></div></div>`;
+  if (!a.ready) return `<div><p>Chargement des comptes…</p></div>`;
+  return `<div class="auth"><div><div class="seg2" role="group" aria-label="Compte"><button type="button" data-act="auth-tab" data-v="in" aria-pressed="${!up}">Se connecter</button><button type="button" data-act="auth-tab" data-v="up" aria-pressed="${up}">Créer un compte</button></div></div>`
+    + `<form class="contact-f" id="auth-form" novalidate>`
+    + (up ? `<label>Pseudo<input id="au-nick" maxlength="24" autocomplete="nickname" required></label>` : '')
+    + `<label>E-mail<input id="au-mail" type="email" maxlength="120" autocomplete="${up ? 'email' : 'username'}" inputmode="email" autocapitalize="none" spellcheck="false" required></label>`
+    + `<label>Mot de passe<input id="au-pass" type="password" maxlength="200" autocomplete="${up ? 'new-password' : 'current-password'}" required></label>`
+    + (up ? `<p class="fine">Au moins 8 caractères pour le mot de passe. Ton pseudo est le nom que les autres inscrits verront.</p>` : '')
+    + `<p class="auth-msg" role="alert" hidden></p>`
+    + `<div class="auth-row"><button class="btn primary" type="submit">${up ? 'Créer mon compte' : 'Se connecter'}</button>${up ? '' : `<button type="button" class="linkb" data-act="auth-reset">Mot de passe oublié ?</button>`}</div></form>`
+    + (SIGNIN.google || SIGNIN.apple ? `<p class="auth-or">ou</p><div class="auth-alt">`
+      + (SIGNIN.google ? `<button type="button" class="btn" data-act="auth-pop" data-v="google">Continuer avec Google</button>` : '')
+      + (SIGNIN.apple ? `<button type="button" class="btn" data-act="auth-pop" data-v="apple">Continuer avec Apple</button>` : '') + `</div>` : '')
+    + `<p class="fine">Avec un compte, tes notes, tes commentaires et ta tier list sont visibles par les autres inscrits, sous ton pseudo. Ton e-mail ne leur est jamais montré. En créant un compte, tu acceptes les <a href="#cgu">conditions générales d’utilisation</a>.</p></div>`;
+}
+function delHTML(u){
+  const pw = u.prov === 'password';
+  return `<div><h2>Supprimer mon compte</h2><form class="contact-f" id="del-form" novalidate>`
+    + `<p>Ton compte, tes notes, tes commentaires et ta tier list seront effacés pour de bon. Télécharge d’abord une sauvegarde si tu veux les garder.</p>`
+    + (pw ? `<input type="email" autocomplete="username" value="${h(u.email)}" hidden readonly><label>Ton mot de passe, pour confirmer<input id="au-del" type="password" maxlength="200" autocomplete="current-password" required></label>`
+          : `<p>Une fenêtre ${u.prov === 'apple.com' ? 'Apple' : 'Google'} va s’ouvrir pour confirmer que c’est bien toi.</p>`)
+    + `<p class="auth-msg" role="alert" hidden></p>`
+    + `<div class="auth-row"><button class="btn" type="submit">Supprimer définitivement</button><button type="button" class="linkb" data-act="auth-del-cancel">Annuler</button></div></form></div>`;
+}
+/* Le bas de la page : pseudo, avis restés sur l’appareil, sauvegarde, déconnexion. */
+function meHTML(){
+  const a = S.auth, u = a.user, fb = S.be === 'firebase';
+  const nLocal = shared() ? countLive(D.lr) : 0, tLocal = shared() && !nLocal && hasRows(D.lt) && !hasRows(myTier());
+  let s = '';
+  if (shared() && !S.me.name) s += `<div><h2>Ton pseudo</h2><p>C’est le nom que les autres inscrits voient à côté de tes avis.</p><div class="acct-f"><input id="nick2" class="nick-in" maxlength="24" autocomplete="nickname" aria-label="Ton pseudo" value="${h(myDoc().nick || '')}" placeholder="Ton prénom ou un pseudo"><button class="btn sm" data-act="save-nick">Enregistrer</button></div></div>`;
+  if (fb && shared() && u && u.prov === 'password' && !u.verified) s += `<div><h2>Adresse e-mail à confirmer</h2><p>Un e-mail t’a été envoyé. Clique sur son lien pour confirmer que l’adresse est la bonne : c’est elle qui sert si tu oublies ton mot de passe.</p><div class="acct-f"><button class="btn sm" data-act="auth-verify">Renvoyer l’e-mail</button></div></div>`;
+  if (nLocal || tLocal) s += `<div><h2>Avis restés sur cet appareil</h2><p>${nLocal ? `${nLocal} avis ${nLocal > 1 ? 'sont enregistrés' : 'est enregistré'}` : 'Une tier list est enregistrée'} sur cet appareil, hors de ton compte.</p><div class="acct-f"><button class="btn sm" data-act="import-local">${nLocal > 1 ? 'Les ajouter' : 'L’ajouter'} à mon compte</button></div></div>`;
+  s += S.be === 'claude'
+    ? `<div><h2>Pas de mot de passe</h2><p>Il n’y a ni inscription ni mot de passe à créer sur ce site.</p></div>`
+    : `<div><h2>Sauvegarde</h2><p>Télécharge un fichier avec tes notes, tes commentaires et ta tier list. Il te sert à les garder, ou à les reprendre ailleurs.</p><div class="acct-f"><button class="btn sm" data-act="backup">Télécharger mes notes</button><button class="btn sm" data-act="restore-pick">Restaurer une sauvegarde</button></div></div>`;
+  if (fb && (shared() || u)){
+    if (a.fail) s += `<div><h2>Ton compte</h2><p>Le service de comptes ne répond pas pour l’instant. Tes changements sont gardés sur cet appareil et partiront au retour de la connexion.</p><div class="acct-f"><button class="btn sm" data-act="reload">Recharger la page</button></div></div>`;
+    else if (!a.ready || !u) s += `<div><h2>Ton compte</h2><p>Connexion à ton compte en cours…</p></div>`;
+    else if (a.confirm === 'delete') s += delHTML(u);
+    else s += `<div><h2>Ton compte</h2><p>Les autres inscrits voient tes notes, tes commentaires et ta tier list, sous ton pseudo. Ton e-mail ne leur est jamais montré.</p>`
+      + (a.force ? `<p class="warn">Tes derniers changements ne sont pas encore envoyés. Si tu te déconnectes maintenant, ils seront perdus.</p>` : '')
+      + `<div class="auth-row"><button class="btn sm" data-act="auth-out">${a.force ? 'Se déconnecter quand même' : 'Se déconnecter'}</button><button class="linkb" data-act="auth-del-ask">Supprimer mon compte</button></div></div>`;
+  }
+  return s;
+}
+/* Messages et boutons des formulaires, mis à jour sans redessiner les champs. */
+function paintAuth(){
+  const root = $('#account'), a = S.auth, txt = a.msg || a.ok;
+  $$('.auth-msg', root).forEach(el => { el.textContent = txt; el.hidden = !txt; el.classList.toggle('is-ok', !a.msg && !!a.ok); });
+  $$('button', root).forEach(b => { b.disabled = !!a.busy; });
+  const sub = $('#auth-form [type="submit"]', root), del = $('#del-form [type="submit"]', root);
+  if (sub) sub.textContent = a.busy === 'form' ? (a.tab === 'up' ? 'Création du compte…' : 'Connexion…') : (a.tab === 'up' ? 'Créer mon compte' : 'Se connecter');
+  if (del) del.textContent = a.busy === 'delete' ? 'Suppression…' : 'Supprimer définitivement';
+}
+function authMsg(text, ok){ S.auth.msg = ok ? '' : text; S.auth.ok = ok ? text : ''; paintAuth(); }
+/* at : heure de la dernière action de connexion, pour replacer le focus quand la page change d’état. */
+function authBusy(v){ S.auth.busy = v || ''; if (v){ S.auth.msg = S.auth.ok = ''; S.auth.at = Date.now(); } paintAuth(); }
+function authDone(msg){
+  S.auth.busy = ''; S.auth.msg = S.auth.ok = ''; S.auth.at = Date.now();
+  render();
+  if (msg) toast(msg);
+  if (S.view === 'compte'){ const n = $('#account .acct-n'); if (n) n.focus({preventScroll:true}); }
+}
 function renderAccount(){
   const el = $('#account');
-  if (el.contains(document.activeElement) && document.activeElement.tagName === 'INPUT') return;
+  if (!$('#acct-top')) el.innerHTML = ['top', 'auth', 'stats', 'me'].map(k => `<div class="acct-part" id="acct-${k}"></div>`).join('');
+  const a = S.auth, u = a.user, fb = S.be === 'firebase', inAcct = fb && (shared() || !!u);
   const rel = FILMS.filter(isOut);
   const seen = rel.filter(f => isSeen(f.id)).length;
   const rated = rel.filter(f => (rev(f.id) || {}).r > 0);
-  const mean = rated.length ? rated.reduce((a, f) => a + rev(f.id).r, 0) / rated.length : 0;
+  const mean = rated.length ? rated.reduce((s, f) => s + rev(f.id).r, 0) / rated.length : 0;
   const nm = S.me.name || (shared() ? (myDoc().nick || '') : '');
-  let who, where;
-  if (S.mode === 'boot'){ who = 'Vérification en cours…'; where = ''; }
+  const mail = u && u.email ? ` avec ${h(u.email)}` : '';
+  let who, where, more = '';
+  if (fb && shared()){ who = `Connecté${mail}.`; where = 'Elle est enregistrée sur ton compte. Tu la retrouves sur tous tes appareils en te connectant.'; }
+  else if (fb && u){ who = `Connecté${mail}.`; where = 'L’enregistrement sur ton compte ne marche pas pour l’instant. Tes notes restent sur cet appareil.'; more = `<div class="acct-f"><button class="btn sm" data-act="auth-resync">Réessayer</button></div>`; }
+  else if (fb){ who = 'Tu n’es pas connecté.'; where = 'Sans compte, tes notes, tes commentaires et ta tier list restent dans ce navigateur, sur cet appareil seulement. Si tu effaces les données du navigateur, ils disparaissent.'; }
+  else if (S.mode === 'boot'){ who = 'Vérification en cours…'; where = ''; }
   else if (shared() && S.me.id){ who = 'Reconnu grâce à ton compte.'; where = 'Ta progression est enregistrée dans le groupe. Tu la retrouves sur n’importe quel appareil en ouvrant cette page avec le même compte.'; }
   else if (shared()){ who = 'Tu participes au groupe depuis cet appareil.'; where = 'Ta progression est enregistrée dans le groupe, mais rattachée à ce navigateur.'; }
   else if (S.shareRead){ who = 'Tu consultes la page en lecture.'; where = 'Ta progression est enregistrée sur cet appareil seulement, car ton accès ne permet pas d’écrire dans le groupe. Demande au propriétaire de la page un accès en modification pour qu’elle te suive partout.'; }
-  else if (API.db){ who = 'Tu n’es pas reconnu ici.'; where = 'Ta progression est enregistrée sur cet appareil seulement.'; }
+  else if (S.be === 'claude'){ who = 'Tu n’es pas reconnu ici.'; where = 'Ta progression est enregistrée sur cet appareil seulement.'; }
   else { who = 'Il n’y a ni inscription ni mot de passe sur ce site.'; where = 'Tes notes, tes commentaires et ta tier list sont enregistrés dans ce navigateur, sur cet appareil seulement. Ils ne sont envoyés nulle part. Si tu effaces les données du navigateur, ils disparaissent.'; }
   const face = S.me.avatar && (S.me.id || nm) ? `<img class="av" src="${h(S.me.avatar)}" alt="">` : `<span class="av ini" aria-hidden="true">${nm ? h(initials(nm)) : '?'}</span>`;
-  const nLocal = shared() ? countLive(D.lr) : 0;
-  el.innerHTML = `<div class="acct-id">${face}<div><p class="acct-n">${h(nm || 'Invité')}</p><p>${who}</p></div></div>`
-    + (where ? `<div><h2>Ta progression</h2><p>${where}</p></div>` : '')
-    + `<dl class="facts"><div><dt>Films vus</dt><dd>${seen} / ${rel.length}</dd></div><div><dt>Films notés</dt><dd>${rated.length}</dd></div><div><dt>Note moyenne</dt><dd>${rated.length ? fmtR(mean) + ' / 5' : 'Aucune'}</dd></div></dl>`
-    + (shared() && !S.me.name ? `<div><h2>Ton pseudo</h2><p>C’est le nom que le groupe voit à côté de tes avis.</p><div class="acct-f"><input id="nick2" class="nick-in" maxlength="24" autocomplete="nickname" aria-label="Ton pseudo" value="${h(myDoc().nick || '')}" placeholder="Ton prénom ou un pseudo"><button class="btn sm" data-act="save-nick">Enregistrer</button></div></div>` : '')
-    + (nLocal ? `<div><h2>Avis restés sur cet appareil</h2><p>${nLocal} avis ${nLocal > 1 ? 'ont été enregistrés' : 'a été enregistré'} ici avant que tu rejoignes le groupe.</p><div class="acct-f"><button class="btn sm" data-act="import-local">${nLocal > 1 ? 'Les ajouter' : 'L’ajouter'} au groupe</button></div></div>` : '')
-    + (API.db
-      ? `<div><h2>Pas de mot de passe</h2><p>Il n’y a ni inscription ni mot de passe à créer sur ce site.</p></div>`
-      : `<div><h2>Sauvegarde</h2><p>Télécharge un fichier avec tes notes, tes commentaires et ta tier list. Il te sert à les garder, ou à les reprendre sur un autre appareil.</p><div class="acct-f"><button class="btn sm" data-act="backup">Télécharger mes notes</button><button class="btn sm" data-act="restore-pick">Restaurer une sauvegarde</button></div></div>`);
+  /* Le nom reçoit le focus après une connexion : il le garde quand ce bloc est redessiné. */
+  const onName = !!document.activeElement && document.activeElement.classList.contains('acct-n');
+  setHTML($('#acct-top'), `<div class="acct-id">${face}<div><p class="acct-n" tabindex="-1">${h(nm || (inAcct ? 'Sans pseudo' : 'Invité'))}</p><p>${who}</p></div></div>`
+    + (where ? `<div><h2>Ta progression</h2><p>${where}</p>${more}</div>` : ''), 'top');
+  if (onName && !document.activeElement.classList.contains('acct-n')){ const n = $('#account .acct-n'); if (n) n.focus({preventScroll:true}); }
+  setHTML($('#acct-auth'), fb && !inAcct ? authHTML() : '', [inAcct, a.ready, a.fail, a.tab].join());
+  setHTML($('#acct-stats'), `<dl class="facts"><div><dt>Films vus</dt><dd>${seen} / ${rel.length}</dd></div><div><dt>Films notés</dt><dd>${rated.length}</dd></div><div><dt>Note moyenne</dt><dd>${rated.length ? fmtR(mean) + ' / 5' : 'Aucune'}</dd></div></dl>`, 'stats');
+  setHTML($('#acct-me'), meHTML(), [S.be, S.me.key, shared(), !!u, a.ready, a.fail, a.confirm].join());
+  paintAuth();
 }
 function renderFilms(){
   const rel = FILMS.filter(isOut);
@@ -1528,11 +1894,14 @@ function renderTiers(){
   const pool = rankable().filter(f => !placed.has(f.id));
   if (S.tierSel && !rankable().some(f => f.id === S.tierSel)) S.tierSel = null;
 
+  /* Avec beaucoup d’inscrits, seules les tier lists les plus récentes ont leur bouton. */
+  const shown = friends.slice().sort((a, b) => D.st[b].t - D.st[a].t).slice(0, 8);
+  if (friends.includes(w) && !shown.includes(w)) shown.push(w);
   let head = '';
   if (friends.length || nLists >= 2){
     head += `<div class="chips" role="group" aria-label="Tier list affichée"><button class="chip" data-act="who" data-v="me" aria-pressed="${w === 'me'}">Ma tier list</button>`
-      + friends.map(k => { const p = who(k); return `<button class="chip" data-act="who" data-v="${h(k)}" aria-pressed="${w === k}">${avatarHTML(p)}${h(p.name)}</button>`; }).join('')
-      + (nLists >= 2 ? `<button class="chip" data-act="who" data-v="group" aria-pressed="${w === 'group'}">Moyenne du groupe</button>` : '') + `</div>`;
+      + shown.map(k => { const p = who(k); return `<button class="chip" data-act="who" data-v="${h(k)}" aria-pressed="${w === k}">${avatarHTML(p)}${h(p.name)}</button>`; }).join('')
+      + (nLists >= 2 ? `<button class="chip" data-act="who" data-v="group" aria-pressed="${w === 'group'}">Moyenne des inscrits</button>` : '') + `</div>`;
   }
   if (editable){
     head += `<div class="th-a"><button class="btn sm" data-act="fill">Remplir avec mes notes</button>`
@@ -1579,18 +1948,24 @@ function renderChars(){
 
 /* ---------- Fiches ---------- */
 function groupHTML(x){
-  const a = avg(x.id);
+  const a = avg(x.id), fb = S.be === 'firebase';
   const items = otherKeys(D.sr).map(k => ({k, r: rev(x.id, k)})).filter(o => o.r && (o.r.r > 0 || o.r.c)).sort((p, q) => q.r.t - p.r.t);
   const sum = a && a.n > 1 ? `<span>Moyenne ${fmtR(a.v)} sur 5, ${a.n} notes</span>` : '';
   let body;
   if (items.length){
-    body = `<ul class="gr">` + items.map(o => { const w = who(o.k); return `<li>${avatarHTML(w)}<div><div class="gr-h"><span class="gr-n">${h(w.name)}</span>${o.r.r > 0 ? starsHTML(o.r.r) : ''}<span class="gr-d">${ago(o.r.t)}</span></div>${o.r.c ? `<p class="gr-c">${h(o.r.c)}</p>` : ''}</div></li>`; }).join('') + `</ul>`;
+    const top = items.slice(0, 20), rest = items.length - top.length;
+    body = `<ul class="gr">` + top.map(o => { const w = who(o.k); return `<li>${avatarHTML(w)}<div><div class="gr-h"><span class="gr-n">${h(w.name)}</span>${o.r.r > 0 ? starsHTML(o.r.r) : ''}<span class="gr-d">${ago(o.r.t)}</span></div>${o.r.c ? `<p class="gr-c">${h(o.r.c)}</p>` : ''}</div></li>`; }).join('') + `</ul>`
+      + (rest ? `<p class="muted">Et ${rest} ${rest > 1 ? 'autres avis' : 'autre avis'}.</p>` : '');
+  } else if (fb && !shared() && !S.auth.user){
+    body = `<p class="muted">Les avis des autres se lisent avec un compte. <a href="#compte" data-act="close">Se connecter ou créer un compte</a></p>`;
+  } else if (fb && S.social === 'wait' && !S.auth.fail){
+    body = `<p class="muted">Chargement des avis…</p>`;
   } else if (!S.shareRead && S.mode !== 'boot'){
-    body = `<p class="muted">Les avis du groupe ne sont pas accessibles ici.</p>`;
+    body = `<p class="muted">Les avis des inscrits ne sont pas accessibles pour l’instant.</p>`;
   } else {
     body = `<p class="muted">Personne d’autre n’a encore donné son avis.</p>`;
   }
-  return `<div class="block-h"><h3>Avis du groupe</h3>${sum}</div>${body}`;
+  return `<div class="block-h"><h3>Avis des inscrits</h3>${sum}</div>${body}`;
 }
 function titleSheet(x){
   const list = S.sheet.ctx === 'all' ? T : FILMS;
@@ -1640,7 +2015,7 @@ function titleSheet(x){
       </div>
     </div>
     ${mine}
-    ${out && API.db ? `<section class="block" id="sh-group">${groupHTML(x)}</section>` : ''}
+    ${out && S.be ? `<section class="block" id="sh-group">${groupHTML(x)}</section>` : ''}
     ${cast.length ? `<section class="block"><h3>Personnages</h3><div class="pchips">${cast.map(c => { const [c1, c2] = PAL[c.f] || PAL.avengers; return `<button class="pchip" data-act="char" data-id="${c.id}"><i style="--c1:${c1};--c2:${c2}">${h(initials(c.n))}</i>${h(c.n)}</button>`; }).join('')}</div></section>` : ''}
   </article>`;
 }
@@ -1852,6 +2227,20 @@ async function clearArt(kind, id){
 }
 
 /* ---------- Contact : coordonnées saisies par la personne qui gère la page ---------- */
+/* Comptes : réglages du projet Firebase (console Firebase, Paramètres du projet, « Vos applications », « Config »).
+   Ces valeurs ne sont pas secrètes : elles désignent le projet, et ce sont les règles du fichier
+   firestore.rules qui protègent les données. Tant que apiKey est vide, le site reste sans compte.
+   La console donne aussi measurementId : c’est Google Analytics, volontairement absent (les CGU disent
+   qu’il n’y a pas de mesure d’audience). storageBucket et messagingSenderId ne servent pas ici. */
+const FIREBASE = {apiKey:'AIzaSyAihpJcbGm6Rq6_KI6yQsDs8VC6Odqpw9k', authDomain:'mcuclassement.firebaseapp.com', projectId:'mcuclassement', appId:'1:646882420809:web:d3ba71a531ec01f137f798'};
+/* Connexions proposées en plus de l’e-mail. Chacune doit aussi être activée dans la console Firebase.
+   Google : l’adresse du compte qui gère le projet est alors montrée aux personnes qui se connectent.
+   Apple : demande un abonnement Apple Developer Program. */
+const SIGNIN = {google:false, apple:false};
+const FB_SDK = 'https://www.gstatic.com/firebasejs/13.2.0/';
+/* Avis des inscrits : on lit les profils les plus récemment actifs, pas tous, pour rester dans l’offre gratuite.
+   La limite des règles Firestore (firestore.rules) doit rester au-dessus de ce nombre. */
+const FEED_MAX = 50;
 /* Coordonnées affichées sur la page Contact du site en ligne. */
 const CONTACT = {name:'', email:'', more:''};
 const MAIL = /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']+$/;
@@ -1864,7 +2253,7 @@ function cleanContact(v){
 function renderContact(){
   const el = $('#contact'), a = document.activeElement;
   if (el.contains(a) && /^(INPUT|TEXTAREA)$/.test(a.tagName)) return;
-  const c = D.contact || (API.db ? null : cleanContact(CONTACT));
+  const c = D.contact || (S.be === 'claude' ? null : cleanContact(CONTACT));
   let html;
   if (c){
     html = `<dl class="facts">${c.name ? `<div><dt>Responsable du site</dt><dd>${h(c.name)}</dd></div>` : ''}${c.email ? `<div><dt>E-mail</dt><dd><a href="mailto:${h(c.email)}">${h(c.email)}</a></dd></div>` : ''}</dl>`
@@ -1901,10 +2290,11 @@ function route(first){
   const v = VIEWS[name] ? name : 'films';
   const changed = v !== S.view;
   S.view = v;
-  if (changed) S.tierSel = null;
+  if (changed){ S.tierSel = null; S.auth.msg = S.auth.ok = ''; S.auth.confirm = ''; S.auth.force = false; }
   Object.keys(VIEWS).forEach(k => { $('#v-' + k).hidden = k !== v; });
   if (changed && !first) window.scrollTo(0, 0);
   render();
+  if (v === 'compte') refreshVerified();
 }
 let toastT = 0;
 function toast(msg){
@@ -1925,6 +2315,27 @@ function arm(el, label, run){
 /* =====================================================================
    Interactions
    ===================================================================== */
+/* Range dans le compte ce qui a été noté sur l’appareil sans compte. */
+function importLocal(silent){
+  if (!shared()) return 0;
+  const doc = myDoc();
+  let n = 0, tier = false;
+  for (const id of Object.keys(D.lr.films)){
+    const a = D.lr.films[id], b = doc.films[id];
+    if (!live(a)) continue;
+    if (!b || a.t >= b.t){ doc.films[id] = a; n++; }
+  }
+  if (hasRows(D.lt) && !hasRows(myTier())){ const t = myTier(); t.rows = D.lt.rows; t.t = stamp(t.t); tier = true; }
+  D.lr = {films:{}, t:0};
+  D.lt = {rows:emptyRows(), t:0};
+  saveLocal();
+  if (tier) commit('tiers');
+  if (!silent || n || doc.nick) commit('reviews');
+  if (silent) return n;
+  render();
+  toast(n ? `${n} avis ajouté${n > 1 ? 's' : ''} à ton compte` : tier ? 'Tier list ajoutée à ton compte' : 'Ton compte avait déjà des avis plus récents');
+  return n;
+}
 const ACT = {
   open(el){ keepFocus(el); openTitle(el.dataset.id, el.dataset.ctx); },
   nav(el){ if (el.dataset.id) openTitle(el.dataset.id); },
@@ -1991,7 +2402,7 @@ const ACT = {
         const r = rev(f.id).r;
         d.rows[r >= 4.5 ? 'S' : r >= 4 ? 'A' : r >= 3 ? 'B' : r >= 2 ? 'C' : 'D'].push(f.id);
       });
-      d.t = Date.now();
+      d.t = stamp(d.t);
       if (S.mode === 'boot') S.bootTier = true;
       commit('tiers');
       S.tierSel = null;
@@ -2003,7 +2414,7 @@ const ACT = {
   reset(el){
     arm(el, 'Tout vider ?', () => {
       const d = myTier();
-      d.rows = emptyRows(); d.t = Date.now();
+      d.rows = emptyRows(); d.t = stamp(d.t);
       if (S.mode === 'boot') S.bootTier = true;
       commit('tiers');
       S.tierSel = null;
@@ -2013,12 +2424,15 @@ const ACT = {
   'save-nick'(el){
     const inp = !el ? null : el.classList.contains('nick-in') ? el : el.parentElement.querySelector('.nick-in');
     if (!inp) return;
-    const v = (inp.value || '').trim().slice(0, 24);
+    const v = (inp.value || '').replace(/\s+/g, ' ').trim().slice(0, 24);
     if (!v){ inp.focus(); return; }
     myDoc().nick = v;
+    S.nickDirty = true;
     commit('reviews');
+    if (S.be === 'firebase' && hasRows(myTier())) commit('tiers');
     inp.blur();
     render();
+    if (S.be === 'firebase') toast('Pseudo enregistré');
   },
   fview(el){
     S.fview = el.dataset.v === 'grid' ? 'grid' : 'line';
@@ -2034,7 +2448,7 @@ const ACT = {
     st.scrollBy({left: (+el.dataset.d || 1) * Math.max(260, st.clientWidth * .72), behavior: mq('(prefers-reduced-motion:reduce)') ? 'auto' : 'smooth'});
   },
   backup(){
-    const body = JSON.stringify({app:'mcuclassement', v:1, at:Date.now(), r:D.lr, t:D.lt}, null, 1);
+    const body = JSON.stringify({app:'mcuclassement', v:1, at:Date.now(), r:myDoc(), t:myTier()}, null, 1);
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([body], {type:'application/json'}));
     a.download = 'mes-notes-mcu-' + new Date().toISOString().slice(0, 10) + '.json';
@@ -2043,21 +2457,151 @@ const ACT = {
     toast('Sauvegarde téléchargée');
   },
   'restore-pick'(){ const inp = $('#restore-file'); inp.value = ''; inp.click(); },
-  'import-local'(){
-    const doc = myDoc();
-    let n = 0;
-    for (const id of Object.keys(D.lr.films)){
-      const a = D.lr.films[id], b = doc.films[id];
-      if (!live(a)) continue;
-      if (!b || a.t >= b.t){ doc.films[id] = a; n++; }
+  'import-local'(el){ if (el && el.blur) el.blur(); importLocal(false); },
+  reload(){ location.reload(); },
+  'auth-tab'(el){
+    const a = S.auth;
+    a.tab = el.dataset.v === 'up' ? 'up' : 'in';
+    a.msg = a.ok = '';
+    if (S.view !== 'compte') return;
+    renderAccount();
+    const b = $('#acct-auth [data-act="auth-tab"][aria-pressed="true"]');
+    if (b) b.focus({preventScroll:true});
+  },
+  async 'auth-submit'(){
+    const a = S.auth, up = a.tab === 'up';
+    if (a.busy || !FB.auth) return;
+    const mailEl = $('#au-mail'), passEl = $('#au-pass'), nickEl = $('#au-nick');
+    const mail = mailEl.value.trim(), pass = passEl.value;
+    const nick = up ? nickEl.value.replace(/\s+/g, ' ').trim().slice(0, 24) : '';
+    if (up && !nick){ authMsg('Choisis un pseudo : c’est le nom que les autres inscrits verront.'); nickEl.focus(); return; }
+    if (!MAIL.test(mail)){ authMsg('Cette adresse e-mail n’a pas la bonne forme.'); mailEl.focus(); return; }
+    if (!pass){ authMsg('Écris ton mot de passe.'); passEl.focus(); return; }
+    if (up && pass.length < 8){ authMsg('Choisis un mot de passe d’au moins 8 caractères.'); passEl.focus(); return; }
+    authBusy('form');
+    try{
+      if (up){
+        a.fresh = {nick};
+        const cred = await FB.a.createUserWithEmailAndPassword(FB.auth, mail, pass);
+        FB.a.sendEmailVerification(cred.user).catch(() => {});
+        settleFresh();
+      } else {
+        await FB.a.signInWithEmailAndPassword(FB.auth, mail, pass);
+      }
+      authDone(up ? 'Compte créé. Tu es connecté.' : 'Tu es connecté.');
+    }catch(e){
+      a.fresh = null;
+      authBusy('');
+      authMsg(authText(e));
+      const again = $(e && e.code === 'auth/invalid-email' ? '#au-mail' : '#au-pass');
+      if (again) again.focus();
     }
-    if (hasRows(D.lt) && !hasRows(myTier())){ const t = myTier(); t.rows = D.lt.rows; t.t = Date.now(); commit('tiers'); }
-    D.lr = {films:{}, t:0};
-    D.lt = {rows:emptyRows(), t:0};
-    saveLocal();
-    commit('reviews');
+  },
+  /* La fenêtre Google ou Apple doit s’ouvrir dans le geste du clic : aucun appel en attente avant elle. */
+  'auth-pop'(el){
+    const a = S.auth;
+    if (a.busy || !FB.auth) return;
+    const step = FB.a.signInWithPopup(FB.auth, provider(el.dataset.v));
+    authBusy(el.dataset.v);
+    step.then(res => {
+      const info = FB.a.getAdditionalUserInfo(res);
+      if (info && info.isNewUser) welcome({});
+      authDone('Tu es connecté.');
+    }).catch(e => {
+      authBusy('');
+      const t = authText(e);
+      if (t) authMsg(t);
+    });
+  },
+  async 'auth-reset'(){
+    const a = S.auth, mailEl = $('#au-mail');
+    if (a.busy || !FB.auth || !mailEl) return;
+    const mail = mailEl.value.trim();
+    if (!MAIL.test(mail)){ authMsg('Écris d’abord ton adresse e-mail, puis clique à nouveau sur « Mot de passe oublié ».'); mailEl.focus(); return; }
+    authBusy('reset');
+    try{
+      await FB.a.sendPasswordResetEmail(FB.auth, mail);
+      authBusy('');
+      authMsg('Si un compte existe avec cette adresse, un e-mail vient de partir. Regarde aussi dans les indésirables.', true);
+    }catch(e){
+      authBusy('');
+      authMsg(authText(e));
+    }
+  },
+  async 'auth-verify'(){
+    if (!FB.user || S.auth.busy) return;
+    authBusy('verify');
+    try{ await FB.a.sendEmailVerification(FB.user); toast('E-mail envoyé. Regarde aussi dans les indésirables.'); }
+    catch(e){ toast(authText(e) || 'L’e-mail n’est pas parti. Réessaie.'); }
+    authBusy('');
+  },
+  'auth-resync'(el){
+    if (el && el.blur) el.blur();
+    if (!FB.user) return;
+    enterAccount(FB.user.uid, null);
+    listenAccount(FB.user.uid);
     render();
-    toast(n ? `${n} avis ajouté${n > 1 ? 's' : ''} au groupe` : 'Le groupe avait déjà des avis plus récents');
+  },
+  async 'auth-out'(){
+    const a = S.auth;
+    if (a.busy || !FB.auth) return;
+    authBusy('out');
+    const sent = await flush(a.force ? 0 : 3500);
+    if (!sent && !a.force){ a.force = true; a.busy = ''; render(); const b = $('[data-act="auth-out"]'); if (b) b.focus(); return; }
+    try{ await FB.a.signOut(FB.auth); toast('Tu es déconnecté'); }
+    catch(e){ a.busy = ''; render(); toast('La déconnexion n’a pas marché. Réessaie.'); }
+  },
+  'auth-del-ask'(){
+    S.auth.confirm = 'delete'; S.auth.msg = S.auth.ok = '';
+    renderAccount();
+    const f = $('#au-del') || $('#del-form [type="submit"]');
+    if (f) f.focus();
+  },
+  'auth-del-cancel'(){
+    S.auth.confirm = ''; S.auth.msg = S.auth.ok = '';
+    renderAccount();
+    const b = $('[data-act="auth-del-ask"]');
+    if (b) b.focus();
+  },
+  /* Suppression : on vérifie d’abord que c’est bien la personne, puis on efface ses documents, puis le compte. */
+  async 'auth-delete'(){
+    const a = S.auth, u = FB.user;
+    if (a.busy || !u || !a.user) return;
+    const prov = a.user.prov;
+    let step;
+    if (prov === 'password'){
+      const el = $('#au-del'), pass = el ? el.value : '';
+      if (!pass){ authMsg('Écris ton mot de passe pour confirmer.'); if (el) el.focus(); return; }
+      step = FB.a.reauthenticateWithCredential(u, FB.a.EmailAuthProvider.credential(u.email, pass));
+    } else {
+      step = FB.a.reauthenticateWithPopup(u, provider(prov));
+    }
+    authBusy('delete');
+    try{
+      const res = await step;
+      let token = null;
+      if (prov === 'apple.com'){ const c = FB.a.OAuthProvider.credentialFromResult(res); token = (c && c.accessToken) || null; }
+      await flush(3000);
+      S.deleting = true;
+      stopListening();
+      W.reviews.dirty = W.tiers.dirty = false;
+      await within(Promise.all(['reviews', 'tiers'].map(k => FB.fs.deleteDoc(FB.fs.doc(FB.db, k, u.uid)))), 15000);
+      if (token) await FB.a.revokeAccessToken(FB.auth, token).catch(() => {});
+      await FB.a.deleteUser(u);
+      toast('Ton compte et tes notes sont supprimés');
+    }catch(e){
+      const begun = S.deleting;
+      S.deleting = false;
+      authBusy('');
+      if (begun && FB.user) listenAccount(FB.user.uid);
+      const code = (e && e.code) || '';
+      const t = code === 'timeout' ? 'Pas de connexion : la suppression n’a pas pu se faire. Réessaie dans un instant.'
+        : (prov === 'password' && /invalid-credential|wrong-password/.test(code)) ? 'Mot de passe incorrect.'
+        : authText(e);
+      if (t) authMsg(t);
+      const el = $('#au-del');
+      if (el && t) el.focus();
+    }
   }
 };
 document.addEventListener('click', e => {
@@ -2099,23 +2643,32 @@ function restoreBackup(o){
   if (!o || typeof o !== 'object' || o.app !== 'mcuclassement' || !o.r){ toast('Ce fichier n’est pas une sauvegarde du site.'); return; }
   const r = cleanReviewDoc(o.r), t = cleanTierDoc(o.t);
   /* Pour chaque film, l’avis le plus récent l’emporte : rien de ce qui est déjà ici n’est perdu. */
-  let n = 0;
+  const doc = myDoc(), mt = myTier();
+  let n = 0, tier = false;
   for (const id of Object.keys(r.films)){
-    const a = r.films[id], b = D.lr.films[id];
-    if (live(a) && (!b || a.t > b.t)){ D.lr.films[id] = a; n++; }
+    const a = r.films[id], b = doc.films[id];
+    if (live(a) && (!b || a.t > b.t)){ doc.films[id] = a; n++; if (S.mode === 'boot') S.bootEdits.add(id); }
   }
-  if (hasRows(t) && (!hasRows(D.lt) || t.t > D.lt.t)) D.lt = {rows:t.rows, t:t.t};
-  S.save = saveLocal() ? 'local' : 'error';
+  if (hasRows(t) && (!hasRows(mt) || t.t > mt.t)){ mt.rows = t.rows; mt.t = t.t || Date.now(); tier = true; if (S.mode === 'boot') S.bootTier = true; }
+  if (n || !shared()) commit('reviews');
+  if (tier) commit('tiers');
   render();
-  toast(n ? `${n} avis restauré${n > 1 ? 's' : ''}` : 'Tes notes étaient déjà à jour');
+  toast(n ? `${n} avis restauré${n > 1 ? 's' : ''}` : tier ? 'Tier list restaurée' : 'Tes notes étaient déjà à jour');
 }
 $('#restore-file').addEventListener('change', async e => {
   const f = e.target.files && e.target.files[0];
-  if (!f || shared()) return;
+  if (!f) return;
   let o = null;
   try{ o = JSON.parse(await f.text()); }catch(err){}
   restoreBackup(o);
 });
+/* Formulaires de la page Compte : la touche Entrée et le bouton passent par ici. */
+document.addEventListener('submit', e => {
+  const id = e.target && e.target.id;
+  if (id === 'auth-form'){ e.preventDefault(); ACT['auth-submit'](); }
+  else if (id === 'del-form'){ e.preventDefault(); ACT['auth-delete'](); }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden && S.view === 'compte') refreshVerified(); });
 $('#art-file').addEventListener('change', e => {
   const f = e.target.files && e.target.files[0];
   if (f && artTarget) setArt(artTarget.kind, artTarget.id, f);

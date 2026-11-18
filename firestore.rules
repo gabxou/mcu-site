@@ -1,0 +1,55 @@
+rules_version = '2';
+
+// Règles de sécurité Cloud Firestore du site.
+// À coller dans la console Firebase : Firestore, onglet « Rules », puis « Publish ».
+//
+//   reviews/{uid} : les notes et les commentaires d'une personne
+//   tiers/{uid}   : sa tier list
+//
+// Toute personne connectée peut lire les documents des inscrits.
+// Chacun n'écrit et n'efface que le sien. Les visiteurs sans compte ne lisent rien.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Le pseudo est facultatif : une chaîne de 24 caractères au plus.
+    function nickOk(d) {
+      return !('nick' in d) || (d.nick is string && d.nick.size() <= 24);
+    }
+
+    match /reviews/{uid} {
+      allow get: if signedIn();
+      // Le site lit les 50 profils les plus récents. Lister toute la collection d'un coup est refusé.
+      allow list: if signedIn() && request.query.limit <= 60;
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['v', 't', 'nick', 'films'])
+        && request.resource.data.v == 1
+        && request.resource.data.t is number
+        && (!('films' in request.resource.data)
+            || (request.resource.data.films is map && request.resource.data.films.size() <= 200))
+        && nickOk(request.resource.data);
+      allow delete: if isOwner(uid);
+    }
+
+    match /tiers/{uid} {
+      allow get: if signedIn();
+      allow list: if signedIn() && request.query.limit <= 60;
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['v', 't', 'nick', 'rows'])
+        && request.resource.data.v == 1
+        && request.resource.data.t is number
+        && request.resource.data.rows is map
+        && request.resource.data.rows.keys().hasOnly(['S', 'A', 'B', 'C', 'D'])
+        && nickOk(request.resource.data);
+      allow delete: if isOwner(uid);
+    }
+  }
+}

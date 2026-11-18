@@ -2,7 +2,7 @@
 
 Site de fans Marvel : chronologie, notes, tier list, personnages. Adresse prévue : https://mcuclassement.fr
 
-Tout le site tient dans `index.html`. Il n’y a ni compte ni base de données : les notes de chaque visiteur restent dans son navigateur. La page Compte permet de les télécharger et de les restaurer.
+Tout le site tient dans `index.html`. Sans réglage, il n’y a ni compte ni base de données : les notes de chaque visiteur restent dans son navigateur. Avec un projet Firebase (voir « Comptes des visiteurs »), chacun peut créer un compte et retrouver ses notes partout.
 
 ## Voir le site sur ton ordinateur
 
@@ -27,7 +27,112 @@ Tu es responsable des images que tu ajoutes. Les affiches et les photos officiel
 
 ## Coordonnées de la page Contact
 
-Dans `index.html`, cherche `const CONTACT` et remplis le nom et l’e-mail. Tant qu’ils sont vides, la page Contact l’indique. Remplis-les avant de rendre le site public.
+Dans `index.html`, cherche `const CONTACT` et remplis le nom et l’e-mail. Tant qu’ils sont vides, la page Contact l’indique. Remplis-les avant de rendre le site public : avec les comptes, c’est à cette adresse que les gens signalent un commentaire ou demandent la suppression de leurs données.
+
+## Comptes des visiteurs (Firebase)
+
+Le code des comptes est dans `index.html`, mais il dort tant que `const FIREBASE` est vide. Pour l’allumer, il faut créer un projet Firebase, le service de Google qui garde les e-mails, les mots de passe et les notes. L’offre gratuite (« Spark ») ne demande pas de carte bancaire.
+
+Ce que les visiteurs obtiennent :
+
+- un compte avec e-mail et mot de passe (Google et Apple peuvent s’ajouter plus tard, voir plus bas) ;
+- leurs notes, leurs commentaires et leur tier list sur tous leurs appareils ;
+- les avis des autres inscrits : derniers avis, moyenne, tier lists.
+
+Ce que ça change pour toi :
+
+- les notes, les commentaires, la tier list et le pseudo de chaque inscrit sont **visibles par tous les autres inscrits** ; l’e-mail ne l’est jamais ;
+- tu gardes des adresses e-mail, donc des données personnelles, et tu dois pouvoir retirer un commentaire qui pose problème (voir « Modérer ») ;
+- les CGU du site passent toutes seules à leur version « avec comptes ». Fais-les relire en même temps que le reste.
+
+Les noms de menus ci-dessous viennent de la documentation de Firebase, relue en novembre 2026. La console est en anglais.
+
+### 1. Créer le projet
+
+1. Ouvre https://console.firebase.google.com/ avec ton compte Google et crée un projet. Donne-lui un nom, par exemple `mcuclassement`.
+2. Firebase te fait accepter ses conditions. Lis-les : c’est toi qui t’engages. La case à cocher dit notamment que tu utilises le service dans un cadre professionnel.
+3. Deux options sont proposées : l’aide par IA (« Gemini in Firebase ») et **Google Analytics**. Elles sont facultatives. Ne les active pas : les CGU du site disent qu’il n’y a pas de mesure d’audience.
+4. Clique sur **Create project**.
+
+### 2. Activer les connexions
+
+1. Dans le menu de gauche : **Security**, puis **Authentication**. Ouvre l’onglet **Sign-in method**.
+2. Active **Email/password**, puis **Save**.
+3. Dans les réglages d’Authentication (`https://console.firebase.google.com/project/_/authentication/settings`), trouve la liste des domaines autorisés (« Authorized domains »). Ajoute `mcuclassement.fr`. Vérifie que `localhost` y est aussi, pour tes essais sur ton ordinateur.
+4. Onglet **Templates** : tu peux changer le nom de l’expéditeur des e-mails. Le site demande déjà des e-mails en français.
+5. Les e-mails sont signés du nom public du projet (« Public-facing name »). D’après l’aide de Firebase, il se change sur la carte du projet, dans les réglages du projet, avec le crayon à côté du nom. Ce champ n’apparaît pas sur tous les projets : s’il manque, regarde simplement quel nom signe l’e-mail de l’étape 5.
+
+### 3. Créer la base de données
+
+1. Menu de gauche : **Databases & Storage**, puis **Firestore**. Clique sur **Create database**.
+2. Choisis un emplacement en Europe : `eur3` (Europe) ou `europe-west9` (Paris). **Ce choix est définitif.**
+3. Choisis **Production mode** : tout est fermé tant que les règles ne sont pas publiées. Puis **Create**.
+4. Ouvre l’onglet **Rules**. Remplace tout le contenu par celui du fichier `firestore.rules` de ce dossier, puis clique sur **Publish**. Un changement de règles met jusqu’à une minute à s’appliquer.
+
+Ces règles disent : une personne connectée lit les avis des inscrits, et n’écrit que les siens. Sans elles, les comptes ne peuvent rien enregistrer.
+
+### 4. Relier le site au projet
+
+1. Sur la page d’accueil du projet, clique sur l’icône **Web**, donne un surnom à l’application, puis **Register app**.
+2. Firebase affiche un objet `firebaseConfig`. Tu le retrouves plus tard dans les réglages du projet, onglet **General**, carte **Your apps**, option **Config**.
+3. Dans `index.html`, cherche `const FIREBASE` et recopie les quatre valeurs `apiKey`, `authDomain`, `projectId` et `appId`, entre les apostrophes. Laisse de côté le reste du bloc (`storageBucket`, `messagingSenderId`, `measurementId` et les lignes `import`) : le site n’en a pas besoin.
+
+Si le bloc contient `measurementId`, Google Analytics est relié au projet. Le site ne le charge pas, donc rien n’est mesuré. Tu peux aussi le délier : réglages du projet, onglet **Integrations**, carte **Google Analytics**.
+
+Ces valeurs ne sont pas des secrets : la documentation de Firebase dit qu’on peut les mettre dans le code, parce qu’elles désignent seulement le projet. Ce sont les règles de l’étape 3 qui protègent les données. Tu recevras peut-être un e-mail de Google Cloud ou une alerte de GitHub disant qu’une clé est publique. Vérifie alors, dans la console Google Cloud (**APIs & Services**, **Credentials**), que c’est bien la clé « Browser key (auto created by Firebase) » et qu’elle n’ouvre que des services Firebase.
+
+### 5. Essayer avant d’envoyer
+
+1. Lance le site sur ton ordinateur (`python3 -m http.server`) et ouvre http://localhost:8000.
+2. Page Compte : crée un compte avec une vraie adresse. Tu dois recevoir un e-mail de confirmation. Ce que tu as déjà noté dans ce navigateur passe d’office dans le nouveau compte.
+3. Note un film. Dans la console Firebase, Firestore doit montrer un document dans `reviews`.
+4. Déconnecte-toi, reconnecte-toi, puis essaie « Mot de passe oublié ».
+5. Si tout marche, envoie la mise à jour avec GitHub Desktop.
+
+Si l’enregistrement échoue, le site le dit et garde les notes sur l’appareil. La cause la plus fréquente : les règles de l’étape 3 ne sont pas publiées, ou le domaine n’est pas dans la liste de l’étape 2.
+
+### Limites de l’offre gratuite
+
+Chiffres relevés sur le site de Firebase en novembre 2026. Ils peuvent changer.
+
+- Base de données : 50 000 lectures et 20 000 écritures par jour, 1 Gio de données.
+- E-mails : 1 000 confirmations d’adresse et 150 « mot de passe oublié » par jour.
+- Création de comptes : 100 par heure depuis une même adresse IP.
+
+Pour rester dans ces limites, le site ne lit pas tous les inscrits : il lit les 50 profils les plus récemment actifs (`FEED_MAX` dans `index.html`). La moyenne et les derniers avis sont calculés sur ces profils. Si une limite est dépassée, Firebase coupe le service concerné jusqu’à sa remise à zéro. Le site le dit et continue de marcher avec les notes gardées sur l’appareil.
+
+### Modérer
+
+Tu es responsable des commentaires que les inscrits publient.
+
+- **Retirer un commentaire** : console Firebase, Firestore, collection `reviews`. Chaque document est une personne ; son pseudo est dans le champ `nick`. Ouvre `films`, puis le film concerné, et vide le champ `c`. Tu peux aussi supprimer le document entier.
+- **Fermer un compte** : dans Authentication, désactive ou supprime l’utilisateur. Supprime aussi ses deux documents, `reviews/…` et `tiers/…` : ils portent le même identifiant que lui.
+- **Signalements** : ils arrivent à l’adresse de la page Contact.
+
+### Connexion avec Google
+
+Le bouton « Continuer avec Google » est prévu dans le code, mais éteint. La raison : Google montre une adresse e-mail « d’assistance » aux personnes qui se connectent ainsi. D’après l’aide de Google, ce doit être l’adresse du compte Google connecté à la console, ou un groupe Google qu’il gère. Avec ton compte personnel, ce serait donc ton adresse personnelle.
+
+Pour l’allumer sans montrer ton adresse :
+
+1. Crée un compte Google réservé au site. Son adresse peut aussi servir pour la page Contact.
+2. Dans les réglages du projet Firebase, ajoute ce compte parmi les propriétaires du projet.
+3. Connecte-toi à la console avec ce compte. Dans **Security**, **Authentication**, onglet **Sign-in method**, active **Google**, choisis cette adresse comme adresse d’assistance, puis **Save**.
+4. Dans `index.html`, passe `google:false` à `google:true` dans `const SIGNIN`.
+
+### Connexion avec Apple
+
+Le bouton « Continuer avec Apple » est prévu dans le code, mais éteint. D’après la documentation de Firebase, cette connexion ne peut être configurée que par un membre de l’Apple Developer Program. Apple annonce 99 USD par an, et demande d’être majeur ou de passer par un parent.
+
+Si tu prends cet abonnement : crée chez Apple un « Services ID » et une clé « Sign In with Apple », déclare l’adresse de retour `https://TON-PROJET.firebaseapp.com/__/auth/handler`, puis remplis le fournisseur **Apple** dans l’onglet **Sign-in method** (Services ID, Team ID, Key ID, clé privée). Dans `index.html`, passe ensuite `apple:false` à `apple:true` dans `const SIGNIN`.
+
+### Tester les comptes sans projet Firebase
+
+```bash
+python3 tests/serveur-essai.py
+```
+
+Ouvre ensuite http://localhost:8002. Le site y tourne avec un faux service de comptes, rangé dans `tests/faux-firebase` : rien ne sort de l’ordinateur, les faux comptes vivent dans le navigateur. C’est pratique pour voir les écrans, mais ça ne remplace pas l’essai de l’étape 5. Il marche aussi quand `const FIREBASE` est rempli : il remplace la configuration à la volée, sans toucher au fichier ni au vrai projet.
 
 ## Mise en ligne avec GitHub Pages et IONOS
 

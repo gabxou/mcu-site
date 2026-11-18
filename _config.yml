@@ -4,3 +4,5 @@ exclude:
   - CLAUDE.md
   - README.md
   - images/NOMS-DES-FICHIERS.csv
+  - firestore.rules
+  - tests

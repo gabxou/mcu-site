@@ -6,3 +6,4 @@ exclude:
   - images/NOMS-DES-FICHIERS.csv
   - firestore.rules
   - tests
+  - outils

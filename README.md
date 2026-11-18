@@ -14,6 +14,16 @@ python3 -m http.server
 
 Ouvre ensuite http://localhost:8000.
 
+## Le logo
+
+Le logo est un anneau de progression : l’arc rouge montre où on en est dans le marathon, le point jaune représente le prochain film. Dans l’en-tête du site, l’arc suit la vraie progression de chaque visiteur.
+
+- `favicon.svg` : l’icône des onglets du navigateur.
+- `apple-touch-icon.png` : l’icône quand on ajoute le site à l’écran d’accueil d’un iPhone.
+- `partage.png` : l’image qui s’affiche quand on partage le lien du site (messageries, réseaux sociaux).
+
+Pour refaire les deux images après un changement de dessin, lance `python3 outils/images-logo.py` depuis ce dossier, sur ton Mac.
+
 ## Ajouter des images
 
 - Affiches des films et des séries : `images/<identifiant>.<format>`, par exemple `images/im1.webp`.

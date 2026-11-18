@@ -18,8 +18,15 @@ Reglages d'essai, dans la console du navigateur :
     localStorage.setItem('__fake.opts', JSON.stringify({offline:true}))
     cles : delay, boot, offline, denyWrite, denyRead, quota, popup ('closed', 'blocked', 'off' ou un e-mail), recent
 Journal des appels : JSON.parse(localStorage.getItem('__fake.log'))
+
+Formulaire de contact : il est branche sur un faux Formspree, ici meme. Rien ne part vers le vrai service.
+    http://localhost:8002/__fake/formspree/last        les derniers messages recus (JSON)
+    http://localhost:8002/__fake/formspree/mode/500    les prochains envois echouent avec ce code (429, 500...)
+    http://localhost:8002/__fake/formspree/mode/0      retour a la normale
+    http://localhost:8002/?contact=0                   formulaire non configure, comme tant que CONTACT_FORM est vide
 """
 import http.server
+import json
 import os
 import re
 import sys
@@ -34,6 +41,11 @@ CFG = re.compile(r"const FIREBASE = \{[^}]*\};")
 CFG_NEW = "const FIREBASE = {apiKey:'fake-key', authDomain:'fake.firebaseapp.test', projectId:'fake', appId:'1:1:web:1'};"
 SDK_MARK = "const FB_SDK = 'https://www.gstatic.com/firebasejs/"
 SIGN_MARK = "const SIGNIN = {"
+# Adresse du formulaire de contact, quelle que soit sa valeur dans index.html.
+FORM = re.compile(r"const CONTACT_FORM = '[^']*';")
+FAKE_FORM = '/__fake/formspree'
+INBOX = []          # derniers messages recus par le faux Formspree
+FORM_FAIL = [0]     # code d'erreur impose aux prochains envois (0 : envoi accepte)
 
 
 def rewrite(page, query):
@@ -51,6 +63,8 @@ def rewrite(page, query):
     google = 'false' if 'google=0' in query else 'true'
     apple = 'true' if 'apple=1' in query else 'false'
     page = page[:start] + "const SIGNIN = {google:" + google + ", apple:" + apple + page[end:]
+    form = '' if 'contact=0' in query else FAKE_FORM
+    page = FORM.sub(lambda m: "const CONTACT_FORM = '" + form + "';", page)
     return page
 
 
@@ -73,6 +87,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def _special(self):
         path, _, query = self.path.partition('?')
         path = path.split('#')[0]
+        if path == FAKE_FORM + '/last':
+            self._send(json.dumps(INBOX, ensure_ascii=False, indent=1).encode('utf-8'), 'application/json; charset=utf-8')
+            return True
+        if path.startswith(FAKE_FORM + '/mode/'):
+            FORM_FAIL[0] = int(path.rsplit('/', 1)[1] or 0)
+            self._send(json.dumps({'fail': FORM_FAIL[0]}).encode('utf-8'), 'application/json; charset=utf-8')
+            return True
         if path in ('/', '/index.html'):
             with open(os.path.join(ROOT, 'index.html'), encoding='utf-8') as f:
                 page = rewrite(f.read(), query)
@@ -99,6 +120,31 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_HEAD(self):
         if not self._special():
             super().do_HEAD()
+
+    def do_POST(self):
+        """Faux Formspree : meme reponse JSON que le vrai, sans rien envoyer."""
+        if self.path.split('?')[0] != FAKE_FORM:
+            self.send_error(404, 'seul le faux Formspree accepte un envoi')
+            return
+        size = int(self.headers.get('Content-Length') or 0)
+        try:
+            data = json.loads(self.rfile.read(size).decode('utf-8') or '{}')
+        except ValueError:
+            data = None
+        if FORM_FAIL[0]:
+            code, body = FORM_FAIL[0], {'error': 'fausse panne', 'errors': [{'code': 'FAKE', 'message': 'fausse panne'}]}
+        elif not isinstance(data, dict) or not re.match(r'^[^\s@]+@[^\s@]+\.[^\s@]+$', str(data.get('email', ''))):
+            code, body = 422, {'error': 'email invalide', 'errors': [{'field': 'email', 'code': 'TYPE_EMAIL', 'message': 'should be an email'}]}
+        else:
+            code, body = 200, {'ok': True, 'next': '/'}
+            INBOX.append(data)
+            del INBOX[:-20]
+        raw = json.dumps(body).encode('utf-8')
+        self.send_response(code)
+        self.send_header('Content-Type', 'application/json; charset=utf-8')
+        self.send_header('Content-Length', str(len(raw)))
+        self.end_headers()
+        self.wfile.write(raw)
 
     def log_message(self, fmt, *args):
         if '/images/' not in str(args[0] if args else ''):

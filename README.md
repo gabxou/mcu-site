@@ -30,13 +30,25 @@ Tu es responsable des images que tu ajoutes. Les affiches et les photos officiel
 
 Le site n’a pas besoin de bandeau cookies. Il range dans le navigateur seulement ce que le visiteur demande : ses notes, ses réglages d’affichage et, s’il a un compte, sa connexion. La CNIL dispense ces usages de consentement, et les CGU les expliquent aux visiteurs.
 
-Un visiteur sans compte ne contacte aucun autre service que l’hébergeur : la police est dans le dossier `fonts`, et le service de comptes n’est chargé que sur la page Compte ou pour un visiteur connecté.
+Un visiteur sans compte ne contacte aucun autre service que l’hébergeur : la police est dans le dossier `fonts`, et le service de comptes n’est chargé que sur la page Compte ou pour un visiteur connecté. Seule exception : quand il envoie un message de contact, ce message passe par Formspree. Il n’y a pas de cookie pour autant.
 
 Il faudra un bandeau, avec un bouton « Tout refuser » aussi simple que « Tout accepter », si tu ajoutes un jour des statistiques de visites, de la publicité, des vidéos YouTube intégrées ou des boutons de réseaux sociaux.
 
-## Coordonnées de la page Contact
+## Formulaire de contact
 
-Dans `index.html`, cherche `const CONTACT` et remplis le nom et l’e-mail. Tant qu’ils sont vides, la page Contact l’indique. Remplis-les avant de rendre le site public : avec les comptes, c’est à cette adresse que les gens signalent un commentaire ou demandent la suppression de leurs données.
+La page Contact a un formulaire : nom, prénom, e-mail, sujet et message. Le site n’a pas de serveur pour envoyer des e-mails : c’est le service Formspree qui reçoit le message et te l’envoie par e-mail. D’après des comparatifs de novembre 2026, l’offre gratuite permet environ 50 messages par mois : vérifie sur leur site.
+
+1. Crée l’adresse qui recevra les messages, réservée au site (par exemple une adresse Gmail créée pour l’occasion). Firebase n’en fournit pas : ses e-mails partent d’une adresse « noreply » qui ne reçoit rien.
+2. Sur https://formspree.io, crée un compte avec cette adresse, puis confirme-la.
+3. Crée un formulaire (« New form »). Formspree te donne son adresse, de la forme `https://formspree.io/f/xxxxxxxx`.
+4. Dans `index.html`, cherche `const CONTACT_FORM` et colle cette adresse entre les apostrophes.
+5. Essaie : envoie-toi un message depuis la page Contact, sur ton ordinateur. Il doit arriver dans ta boîte, peut-être dans les indésirables la première fois.
+
+Tant que `CONTACT_FORM` est vide, la page dit que le formulaire n’est pas encore actif. Avant de rendre le site public, il doit marcher : c’est par là que les gens signalent un commentaire ou demandent la suppression de leurs données.
+
+Pour répondre, réponds simplement au message reçu : la réponse part à l’adresse du visiteur. Sous le formulaire, les visiteurs lisent que leurs informations passent par Formspree, et les CGU le détaillent.
+
+`const CONTACT` (nom, e-mail, autre moyen de te joindre) est facultatif : ce que tu y remplis s’affiche au-dessus du formulaire. Le nom servira peut-être à indiquer l’éditeur du site : c’est un des points de l’avis juridique.
 
 ## Comptes des visiteurs (Firebase)
 
@@ -116,7 +128,7 @@ Tu es responsable des commentaires que les inscrits publient.
 
 - **Retirer un commentaire** : console Firebase, Firestore, collection `reviews`. Chaque document est une personne ; son pseudo est dans le champ `nick`. Ouvre `films`, puis le film concerné, et vide le champ `c`. Tu peux aussi supprimer le document entier.
 - **Fermer un compte** : dans Authentication, désactive ou supprime l’utilisateur. Supprime aussi ses deux documents, `reviews/…` et `tiers/…` : ils portent le même identifiant que lui.
-- **Signalements** : ils arrivent à l’adresse de la page Contact.
+- **Signalements** : ils arrivent par le formulaire de la page Contact, dans la boîte liée à ton compte Formspree.
 
 ### Connexion avec Google
 
@@ -142,6 +154,8 @@ python3 tests/serveur-essai.py
 ```
 
 Ouvre ensuite http://localhost:8002. Le site y tourne avec un faux service de comptes, rangé dans `tests/faux-firebase` : rien ne sort de l’ordinateur, les faux comptes vivent dans le navigateur. C’est pratique pour voir les écrans, mais ça ne remplace pas l’essai de l’étape 5. Il marche aussi quand `const FIREBASE` est rempli : il remplace la configuration à la volée, sans toucher au fichier ni au vrai projet.
+
+Le formulaire de contact y est branché sur un faux Formspree : rien ne part. Les messages envoyés s’affichent sur http://localhost:8002/__fake/formspree/last.
 
 ## Mise en ligne avec GitHub Pages et IONOS
 

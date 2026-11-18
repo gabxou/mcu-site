@@ -274,6 +274,10 @@ main{overflow-x:clip}
 .contact-f input{padding:.6em 1em;border-radius:12px;border:1px solid var(--line2);background:rgba(16,2,4,.5);font-weight:400}
 .contact-f textarea{margin-top:0;font-weight:400}
 .contact-more{white-space:pre-wrap;overflow-wrap:anywhere}
+#contact > div:empty{display:none}
+#contact-done:focus{outline:none}
+/* Champ piège du formulaire de contact : hors de l’écran, ignoré des lecteurs d’écran. */
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .acct-part{display:contents}
 .acct-id > div{min-width:0}
 .acct-id p,.gr-n{overflow-wrap:anywhere}
@@ -582,12 +586,13 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
       <div><h2>Objet du site</h2><p>Ce site est un site de fans, non officiel. Il permet de suivre les films et les séries de l’univers Marvel dans l’ordre de leur histoire, de les noter, de les commenter et de les classer<span data-if="acct" hidden>, et de lire les avis des autres personnes inscrites</span>. Il n’est ni affilié à Marvel ou à Disney, ni approuvé par eux.</p></div>
       <div><h2>Accès</h2><p>L’accès au site est gratuit. Le site est proposé en l’état : il peut évoluer, être interrompu ou être fermé à tout moment, sans préavis. Les informations présentées, notamment l’ordre et les époques des histoires, sont données à titre indicatif.</p></div>
       <div data-if="noacct"><h2>Vos notes et vos données</h2><p>Il n’y a ni inscription, ni compte, ni mot de passe. Vos notes, vos commentaires et votre tier list sont enregistrés uniquement dans votre navigateur, sur votre appareil. Ils ne sont pas transmis au responsable du site et ne sont visibles par personne d’autre.</p><p>Vous pouvez les modifier ou les effacer à tout moment depuis les fiches, en télécharger une copie depuis la page <a href="#compte">Compte</a>, ou tout supprimer en effaçant les données du site dans votre navigateur.</p><p>Le site n’utilise ni cookie, ni publicité, ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes et vos réglages d’affichage.</p></div>
-      <div data-if="acct" hidden><h2>Compte, notes et données</h2><p>Vous pouvez utiliser le site sans compte : vos notes, vos commentaires et votre tier list restent alors uniquement dans votre navigateur, sur votre appareil.</p><p>Vous pouvez aussi créer un compte avec une adresse e-mail et un mot de passe, ou avec un compte Google ou Apple lorsque le site le propose. Le site enregistre alors votre adresse e-mail, votre pseudo, vos notes, vos commentaires et votre tier list, afin de vous les rendre sur tous vos appareils. Votre mot de passe est géré par le service de comptes : le responsable du site n’y a pas accès.</p><p>Vos notes, vos commentaires, votre tier list et votre pseudo sont visibles par les autres personnes inscrites. Votre adresse e-mail ne leur est jamais montrée.</p><p>Vous pouvez modifier ou effacer vos avis à tout moment depuis les fiches, en télécharger une copie et supprimer votre compte depuis la page <a href="#compte">Compte</a> : vos données sont alors effacées. Vous pouvez aussi demander l’accès à vos données, leur correction ou leur effacement en écrivant à l’adresse de la page <a href="#contact">Contact</a>.</p><p>Le site n’utilise ni publicité ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes, vos réglages d’affichage et votre connexion. Si vous ouvrez la page Compte, le service de comptes y range aussi quelques données techniques sur son propre fonctionnement.</p></div>
-      <div data-if="acct" hidden><h2>Contenus que vous publiez</h2><p>Vos commentaires, votre tier list et votre pseudo sont lus par les autres personnes inscrites : vous en êtes responsable. Sont interdits les contenus illicites, injurieux, haineux ou portant atteinte aux droits d’autrui, ainsi que la publicité et l’usurpation d’identité.</p><p>Le responsable du site peut retirer un contenu ou fermer un compte qui ne respecte pas ces règles. Pour signaler un contenu, écrivez à l’adresse indiquée sur la page <a href="#contact">Contact</a>.</p></div>
-      <div><h2>Hébergement et services tiers</h2><p>Le site est hébergé par GitHub Pages, un service de GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, États-Unis. Comme tout hébergeur, GitHub reçoit l’adresse IP des visiteurs pour leur transmettre les pages.</p><p>La police de caractères et les images sont hébergées avec le site. <span data-if="noacct">Le site ne fait appel à aucun autre service.</span></p><p data-if="acct" hidden>Les comptes et les données qui s’y rattachent sont gérés avec Firebase, un service de Google. Google traite ces données pour le compte du responsable du site, y compris en dehors de l’Union européenne, notamment aux États-Unis. Le site ne fait appel à Firebase que si vous ouvrez la page Compte ou si vous êtes connecté : Google reçoit alors l’adresse IP de votre appareil. Sans compte, le site ne fait appel à aucun autre service.</p></div>
+      <div data-if="acct" hidden><h2>Compte, notes et données</h2><p>Vous pouvez utiliser le site sans compte : vos notes, vos commentaires et votre tier list restent alors uniquement dans votre navigateur, sur votre appareil.</p><p>Vous pouvez aussi créer un compte avec une adresse e-mail et un mot de passe, ou avec un compte Google ou Apple lorsque le site le propose. Le site enregistre alors votre adresse e-mail, votre pseudo, vos notes, vos commentaires et votre tier list, afin de vous les rendre sur tous vos appareils. Votre mot de passe est géré par le service de comptes : le responsable du site n’y a pas accès.</p><p>Vos notes, vos commentaires, votre tier list et votre pseudo sont visibles par les autres personnes inscrites. Votre adresse e-mail ne leur est jamais montrée.</p><p>Vous pouvez modifier ou effacer vos avis à tout moment depuis les fiches, en télécharger une copie et supprimer votre compte depuis la page <a href="#compte">Compte</a> : vos données sont alors effacées. Vous pouvez aussi demander l’accès à vos données, leur correction ou leur effacement depuis la page <a href="#contact">Contact</a>.</p><p>Le site n’utilise ni publicité ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes, vos réglages d’affichage et votre connexion. Si vous ouvrez la page Compte, le service de comptes y range aussi quelques données techniques sur son propre fonctionnement.</p></div>
+      <div data-if="acct" hidden><h2>Contenus que vous publiez</h2><p>Vos commentaires, votre tier list et votre pseudo sont lus par les autres personnes inscrites : vous en êtes responsable. Sont interdits les contenus illicites, injurieux, haineux ou portant atteinte aux droits d’autrui, ainsi que la publicité et l’usurpation d’identité.</p><p>Le responsable du site peut retirer un contenu ou fermer un compte qui ne respecte pas ces règles. Pour signaler un contenu, utilisez la page <a href="#contact">Contact</a>.</p></div>
+      <div><h2>Messages de contact</h2><p>Le formulaire de la page <a href="#contact">Contact</a> demande votre nom, votre prénom, votre adresse e-mail, un sujet et un message. Ces informations servent uniquement à vous répondre.</p><p>Elles sont transmises par le service Formspree, puis conservées dans la messagerie du responsable du site le temps de traiter votre demande, et au plus un an. Formspree peut en garder une copie pendant une durée limitée, selon ses propres règles. Vous pouvez demander leur suppression à tout moment.</p></div>
+      <div><h2>Hébergement et services tiers</h2><p>Le site est hébergé par GitHub Pages, un service de GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, États-Unis. Comme tout hébergeur, GitHub reçoit l’adresse IP des visiteurs pour leur transmettre les pages.</p><p>La police de caractères et les images sont hébergées avec le site.</p><p>Le formulaire de contact passe par Formspree, un service établi aux États-Unis. Il n’est contacté qu’au moment où vous envoyez un message : il reçoit alors ce que vous avez écrit et l’adresse IP de votre appareil, et le transmet par e-mail au responsable du site. <span data-if="noacct">En dehors de cet envoi, le site ne fait appel à aucun autre service.</span></p><p data-if="acct" hidden>Les comptes et les données qui s’y rattachent sont gérés avec Firebase, un service de Google. Google traite ces données pour le compte du responsable du site, y compris en dehors de l’Union européenne, notamment aux États-Unis. Le site ne fait appel à Firebase que si vous ouvrez la page Compte ou si vous êtes connecté : Google reçoit alors l’adresse IP de votre appareil. Sans compte, et en dehors de l’envoi d’un message de contact, le site ne fait appel à aucun autre service.</p></div>
       <div><h2>Propriété intellectuelle</h2><p>Marvel, les titres des films et des séries ainsi que les noms des personnages appartiennent à leurs détenteurs respectifs. Ils ne sont cités ici que pour désigner les œuvres concernées. Les textes de présentation et l’habillage du site ont été créés pour lui.</p><p>Les éventuelles images d’illustration restent la propriété de leurs auteurs. Tout détenteur de droits qui souhaite le retrait d’un contenu peut en faire la demande depuis la page <a href="#contact">Contact</a> ; il sera retiré dans les meilleurs délais.</p></div>
       <div><h2>Responsabilité</h2><p>Le responsable du site ne peut être tenu pour responsable d’une erreur dans les informations présentées, d’une interruption du service ou d’une perte des notes enregistrées.</p></div>
-      <div><h2>Éditeur et contact</h2><p>Le site est édité par la personne indiquée sur la page <a href="#contact">Contact</a>. Pour toute question ou demande concernant le site, écrivez à l’adresse qui y figure.</p></div>
+      <div><h2>Éditeur et contact</h2><p>Le site est édité par la personne indiquée sur la page <a href="#contact">Contact</a>. Pour toute question ou demande concernant le site, utilisez le formulaire de cette page.</p></div>
     </div>
   </section>
 
@@ -2253,8 +2258,12 @@ const FB_SDK = 'https://www.gstatic.com/firebasejs/13.2.0/';
 /* Avis des inscrits : on lit les profils les plus récemment actifs, pas tous, pour rester dans l’offre gratuite.
    La limite des règles Firestore (firestore.rules) doit rester au-dessus de ce nombre. */
 const FEED_MAX = 50;
-/* Coordonnées affichées sur la page Contact du site en ligne. */
+/* Coordonnées affichées sur la page Contact du site en ligne. Facultatives : le formulaire suffit pour être joint. */
 const CONTACT = {name:'', email:'', more:''};
+/* Formulaire de contact : adresse du formulaire Formspree du propriétaire, de la forme https://formspree.io/f/xxxxxxxx
+   (README, « Formulaire de contact »). Vide : la page dit que le formulaire n’est pas encore actif.
+   Formspree n’est contacté qu’au moment où un visiteur envoie un message. */
+const CONTACT_FORM = 'https://formspree.io/f/xjywwdze';
 const MAIL = /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']+$/;
 function cleanContact(v){
   const str = (x, n) => typeof x === 'string' ? x.trim().slice(0, n) : '';
@@ -2262,21 +2271,78 @@ function cleanContact(v){
   if (c.email && !MAIL.test(c.email)) c.email = '';
   return c.name || c.email || c.more ? c : null;
 }
-function renderContact(){
-  const el = $('#contact'), a = document.activeElement;
-  if (el.contains(a) && /^(INPUT|TEXTAREA)$/.test(a.tagName)) return;
-  const c = D.contact || (S.be === 'claude' ? null : cleanContact(CONTACT));
-  let html;
-  if (c){
-    html = `<dl class="facts">${c.name ? `<div><dt>Responsable du site</dt><dd>${h(c.name)}</dd></div>` : ''}${c.email ? `<div><dt>E-mail</dt><dd><a href="mailto:${h(c.email)}">${h(c.email)}</a></dd></div>` : ''}</dl>`
-      + (c.more ? `<p class="contact-more">${h(c.more)}</p>` : '');
-  } else if (S.mode === 'boot'){
-    html = `<p>Chargement…</p>`;
-  } else if (!S.shareRead){
-    html = `<p>Les coordonnées ne sont pas encore renseignées.</p>`;
-  } else {
-    html = `<p>Les coordonnées ne sont pas encore renseignées.</p>`;
+/* Page Contact : coordonnées (si renseignées), formulaire, et, dans Claude seulement, le réglage des coordonnées.
+   Chaque bloc n’est redessiné que s’il change (setHTML) : ce qui est en cours de saisie reste en place. */
+const CT = {sent:false, busy:false};
+function contactHTML(c){
+  const alt = c && c.email ? ` Tu peux aussi écrire à <a href="mailto:${h(c.email)}">${h(c.email)}</a>.` : '';
+  if (!CONTACT_FORM) return `<div><h2>Écrire au responsable du site</h2><p>Le formulaire de contact n’est pas encore actif.${alt}</p></div>`;
+  if (CT.sent) return `<div><h2 id="contact-done" tabindex="-1">Message envoyé</h2><p>Merci. La réponse arrivera à l’adresse e-mail que tu as donnée.</p><div class="auth-row"><button type="button" class="btn sm" data-act="contact-new">Écrire un autre message</button></div></div>`;
+  return `<div><h2>Écrire au responsable du site</h2><p>Une question, un commentaire à signaler, une demande sur tes données ou sur une image : écris ici.</p>`
+    + `<form class="contact-f" id="contact-form" novalidate>`
+    + `<label>Nom<input id="cf-nom" maxlength="60" autocomplete="family-name" required></label>`
+    + `<label>Prénom<input id="cf-prenom" maxlength="60" autocomplete="given-name" required></label>`
+    + `<label>E-mail<input id="cf-mail" type="email" maxlength="120" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" required></label>`
+    + `<label>Sujet<input id="cf-sujet" maxlength="120" required></label>`
+    + `<label>Message<textarea id="cf-msg" maxlength="4000" rows="6" required></textarea></label>`
+    + `<div class="hp" aria-hidden="true"><label>Laisse ce champ vide<input id="cf-hp" tabindex="-1" autocomplete="off"></label></div>`
+    + `<p class="fine">Ton nom, ton prénom, ton e-mail et ton message servent seulement à te répondre. Ils passent par Formspree, un service établi aux États-Unis, qui les transmet par e-mail au responsable du site. Plus de détails dans les <a href="#cgu">conditions générales d’utilisation</a>.</p>`
+    + `<p class="auth-msg" role="alert" hidden></p>`
+    + `<div class="auth-row"><button class="btn primary" type="submit">Envoyer</button></div></form></div>`;
+}
+/* Message et état du bouton, sans toucher aux champs. Appelée sans texte, elle laisse le message affiché. */
+function paintContact(msg){
+  const root = $('#contact-send');
+  if (!root) return;
+  const m = $('.auth-msg', root);
+  if (m && msg !== undefined){ m.textContent = msg; m.hidden = !msg; }
+  $$('input, textarea, button', root).forEach(x => { x.disabled = CT.busy; });
+  const b = $('#contact-form [type="submit"]', root);
+  if (b) b.textContent = CT.busy ? 'Envoi…' : 'Envoyer';
+}
+function contactSent(){
+  CT.sent = true; CT.busy = false;
+  render();
+  const d = $('#contact-done');
+  if (d) d.focus({preventScroll:true});
+}
+async function sendContact(){
+  if (CT.busy || !CONTACT_FORM) return;
+  const val = id => { const x = $('#' + id); return x ? x.value.trim() : ''; };
+  const nom = val('cf-nom'), prenom = val('cf-prenom'), mail = val('cf-mail'), sujet = val('cf-sujet'), msg = val('cf-msg');
+  const miss = !nom ? ['cf-nom', 'Écris ton nom.']
+    : !prenom ? ['cf-prenom', 'Écris ton prénom.']
+    : !mail ? ['cf-mail', 'Écris ton adresse e-mail : c’est là que tu recevras la réponse.']
+    : !MAIL.test(mail) ? ['cf-mail', 'Cette adresse e-mail n’a pas la bonne forme.']
+    : !sujet ? ['cf-sujet', 'Écris le sujet de ton message.']
+    : !msg ? ['cf-msg', 'Écris ton message.'] : null;
+  if (miss){ paintContact(miss[1]); $('#' + miss[0]).focus(); return; }
+  /* Champ piège, invisible : seul un robot le remplit. On fait comme si le message était parti. */
+  if (val('cf-hp')){ contactSent(); return; }
+  CT.busy = true;
+  paintContact('');
+  const c = cleanContact(CONTACT), alt = c && c.email ? ' Tu peux aussi écrire à ' + c.email + '.' : '';
+  let text;
+  try{
+    const r = await fetch(CONTACT_FORM, {method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'},
+      body: JSON.stringify({Nom:nom, 'Prénom':prenom, email:mail, Sujet:sujet, Message:msg, _subject:'[mcuclassement.fr] ' + sujet})});
+    if (r.ok){ contactSent(); return; }
+    text = r.status === 429 ? 'Trop de messages en peu de temps. Réessaie plus tard.' : 'L’envoi n’a pas marché. Réessaie dans un moment.';
+  }catch(e){
+    text = navigator.onLine === false ? 'Pas de connexion internet. Réessaie quand elle revient.' : 'L’envoi n’a pas marché. Réessaie dans un moment.';
   }
+  CT.busy = false;
+  paintContact(text + alt);
+}
+function renderContact(){
+  const el = $('#contact');
+  if (!$('#contact-send', el)) el.innerHTML = '<div id="contact-info"></div><div id="contact-send"></div><div id="contact-admin"></div>';
+  const c = D.contact || (S.be === 'claude' ? null : cleanContact(CONTACT));
+  setHTML($('#contact-info'), c ? `<dl class="facts">${c.name ? `<div><dt>Responsable du site</dt><dd>${h(c.name)}</dd></div>` : ''}${c.email ? `<div><dt>E-mail</dt><dd><a href="mailto:${h(c.email)}">${h(c.email)}</a></dd></div>` : ''}</dl>`
+    + (c.more ? `<p class="contact-more">${h(c.more)}</p>` : '') : '', 'info');
+  setHTML($('#contact-send'), contactHTML(c), [CONTACT_FORM ? 'on' : 'off', CT.sent].join());
+  paintContact();
+  let html = '';
   if (S.admin && shared()){
     html += `<div><h2>${c ? 'Modifier les coordonnées' : 'Renseigner les coordonnées'}</h2><p>Ce formulaire n’apparaît que pour les personnes qui gèrent la page. Ce que tu enregistres s’affiche pour les visiteurs connectés.</p>`
       + `<div class="contact-f"><label>Nom ou pseudo<input id="ct-name" maxlength="60" autocomplete="name" value="${h(c ? c.name : '')}"></label>`
@@ -2284,7 +2350,7 @@ function renderContact(){
       + `<label>Autre moyen de te joindre, facultatif<textarea id="ct-more" maxlength="400">${h(c ? c.more : '')}</textarea></label>`
       + `<div><button class="btn primary sm" data-act="save-contact">Enregistrer</button></div></div></div>`;
   }
-  el.innerHTML = html;
+  setHTML($('#contact-admin'), html, 'admin');
 }
 
 /* ---------- Orchestration ---------- */
@@ -2360,6 +2426,12 @@ const ACT = {
     inp.click();
   },
   'art-clear'(el){ clearArt(el.dataset.kind, el.dataset.id); },
+  'contact-new'(){
+    CT.sent = false;
+    render();
+    const n = $('#cf-nom');
+    if (n) n.focus();
+  },
   async 'save-contact'(){
     const name = $('#ct-name').value.trim().slice(0, 60), email = $('#ct-mail').value.trim().slice(0, 120), more = $('#ct-more').value.trim().slice(0, 400);
     if (email && !MAIL.test(email)){ toast('Cette adresse e-mail n’a pas la bonne forme.'); $('#ct-mail').focus(); return; }
@@ -2679,6 +2751,7 @@ document.addEventListener('submit', e => {
   const id = e.target && e.target.id;
   if (id === 'auth-form'){ e.preventDefault(); ACT['auth-submit'](); }
   else if (id === 'del-form'){ e.preventDefault(); ACT['auth-delete'](); }
+  else if (id === 'contact-form'){ e.preventDefault(); sendContact(); }
 });
 document.addEventListener('visibilitychange', () => { if (!document.hidden && S.view === 'compte') refreshVerified(); });
 $('#art-file').addEventListener('change', e => {

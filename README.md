@@ -48,7 +48,7 @@ Tant que `CONTACT_FORM` est vide, la page dit que le formulaire n’est pas enco
 
 Pour répondre, réponds simplement au message reçu : la réponse part à l’adresse du visiteur. Sous le formulaire, les visiteurs lisent que leurs informations passent par Formspree, et les CGU le détaillent.
 
-`const CONTACT` (nom, e-mail, autre moyen de te joindre) est facultatif : ce que tu y remplis s’affiche au-dessus du formulaire. Le nom servira peut-être à indiquer l’éditeur du site : c’est un des points de l’avis juridique.
+`const CONTACT` (nom, e-mail, autre moyen de te joindre) est facultatif : ce que tu y remplis s’affiche au-dessus du formulaire. Laisse le nom vide : tu as choisi de rester anonyme comme éditeur du site, et les CGU l’expliquent.
 
 ## Comptes des visiteurs (Firebase)
 

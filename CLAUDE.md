@@ -16,7 +16,7 @@ Le projet est né dans Claude (chat), comme page hébergée « artefact ». Il a
 - `404.html` (renvoie `/classement` vers `/#classement`, le reste vers l'accueil), `CNAME` (`mcuclassement.fr`).
 - Le logo, « l'anneau de progression », choisi par le propriétaire le 18 novembre 2026 parmi quatre pistes. C'est une piste claire, un arc rouge `#E0202F` (la progression dans le marathon) qui part du haut, et un point jaune `#FFC53D` au centre (le prochain film), sur `#141418`. Il est original : ni police ni logo de Marvel.
   - Dans l'en-tête, l'arc montre la vraie progression du visiteur (`#ring-p`), à côté de « MCU » en Archivo serrée (`.brand-n`).
-  - Dans l'ouverture animée, l'anneau se referme, puis le point apparaît.
+  - Dans l'ouverture animée, l'anneau se referme, le point apparaît, puis on plonge dans le point jaune, à la demande du propriétaire. C'est un grand zoom (`#intro.zoom`) dont l'échelle `--zoom` est calculée pour que le point couvre l'écran jusqu'au coin le plus loin. Le site apparaît ensuite en fondu. Un clic ou une touche saute l'ouverture sans zoom (`skip`). Durée totale : environ 2,7 s.
   - Fichiers : `favicon.svg` (icône des onglets, arc à 72 %), `apple-touch-icon.png` (180 × 180, écran d'accueil iPhone), `partage.png` (1200 × 630, image des liens partagés, déclarée par `og:image`).
   - `outils/images-logo.py` refait les deux PNG sur un Mac (rendu par `qlmanage`). `outils/` est exclu du site publié.
 - `README.md` : guide pour le propriétaire, dont la mise en ligne pas à pas avec les valeurs DNS vérifiées.

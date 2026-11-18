@@ -97,7 +97,13 @@ main{overflow-x:clip}
   .tabs{display:none}
   main{padding-bottom:calc(var(--dockh) + 36px)}
   :root{--tw:70px}
+  /* La barre du haut se cache quand on descend (les onglets sont en bas), et revient quand on remonte. */
+  .bar{transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s}
+  .bar-away .bar{transform:translateY(calc(-100% - 24px - env(safe-area-inset-top,0px)));opacity:0;pointer-events:none}
+  .tl-h{transition:top .28s cubic-bezier(.2,.8,.2,1)}
+  .bar-away .tl-h{top:calc(10px + env(safe-area-inset-top,0px))}
 }
+@media (prefers-reduced-motion:reduce){.bar,.tl-h{transition:none}}
 
 /* ---------- Boutons, puces ---------- */
 .btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line2);background:rgba(255,255,255,.06);color:var(--tx);font-weight:650;font-size:.94rem;line-height:1.2;padding:.66em 1.1em;border-radius:999px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,box-shadow .15s}
@@ -303,6 +309,10 @@ main{overflow-x:clip}
 .ph{padding:clamp(30px,5.6vw,70px) 0 clamp(18px,2.6vw,28px)}
 .ph h1{font-size:clamp(2.1rem,6.2vw,4.4rem);line-height:.95;font-weight:800;font-stretch:125%;letter-spacing:-.04em}
 .ph p{max-width:60ch;margin-top:14px;color:var(--tx2)}
+.ph p strong{color:var(--tx);font-weight:700}
+.lbl .opt{font-weight:400;color:var(--tx3)}
+a.wiki{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:3px}
+a.wiki:hover,a.wiki:focus-visible{text-decoration-color:currentColor}
 .empty{padding:28px 0;color:var(--tx3)}
 
 /* ---------- Films + séries ---------- */
@@ -498,8 +508,8 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
     <span class="brand-n">MCU</span>
   </a>
   <nav class="tabs" aria-label="Pages">
-    <a href="#films" data-tab="films">Films</a>
-    <a href="#tout" data-tab="tout">Films + séries</a>
+    <a href="#films" data-tab="films">Accueil</a>
+    <a href="#tout" data-tab="tout">Chronologie</a>
     <a href="#classement" data-tab="classement">Classement</a>
     <a href="#personnages" data-tab="personnages">Personnages</a>
     <a href="#avancee" data-tab="avancee">Avancée</a>
@@ -528,7 +538,7 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
 
   <section class="view wrap" id="v-tout" hidden>
     <header class="ph">
-      <h1>Films + séries</h1>
+      <h1>Chronologie</h1>
       <p id="all-lede"></p>
     </header>
     <div class="chips" id="all-filters" role="group" aria-label="Filtrer la chronologie"></div>
@@ -539,7 +549,7 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
   <section class="view wrap" id="v-classement" hidden>
     <header class="ph">
       <h1>Classement</h1>
-      <p>Range les films de S, le chef-d’œuvre, à D, celui qu’on préfère oublier.</p>
+      <p><strong>Range les films de S, le chef-d’œuvre, à D, celui qu’on préfère oublier.</strong><span data-if="acct" hidden> Avec un compte, compare ta tier list avec celles des autres inscrits et avec leur moyenne.</span></p>
     </header>
     <div class="th" id="tier-head"></div>
     <div class="tiers" id="tiers"></div>
@@ -612,8 +622,8 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
 </main>
 
 <nav class="dock" aria-label="Pages">
-  <a href="#films" data-tab="films"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5v15M16 4.5v15" stroke="currentColor" stroke-width="2"/></svg><span>Films</span></a>
-  <a href="#tout" data-tab="tout"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="6" cy="7" r="2.2" fill="currentColor"/><circle cx="6" cy="17" r="2.2" fill="currentColor"/><path d="M11 7h9M11 17h9M11 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>+ séries</span></a>
+  <a href="#films" data-tab="films"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5v15M16 4.5v15" stroke="currentColor" stroke-width="2"/></svg><span>Accueil</span></a>
+  <a href="#tout" data-tab="tout"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="6" cy="7" r="2.2" fill="currentColor"/><circle cx="6" cy="17" r="2.2" fill="currentColor"/><path d="M11 7h9M11 17h9M11 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Chronologie</span></a>
   <a href="#classement" data-tab="classement"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h11M4 18h6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span>Classement</span></a>
   <a href="#personnages" data-tab="personnages"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 20c.6-3.6 3.4-5.6 7-5.6s6.4 2 7 5.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Personnages</span></a>
   <a href="#avancee" data-tab="avancee"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12.4l2.7 2.7L16 9.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Avancée</span></a>
@@ -2007,9 +2017,9 @@ function titleSheet(x){
         <button class="seen" id="sh-seen" data-act="toggle-seen" aria-pressed="${!!(r.s || r.r)}">${ICON.check}Vu</button>
         <button class="linkb" id="sh-clear" data-act="clear-rate"${r.r ? '' : ' hidden'}>Effacer ma note</button>
       </div>
-      <label class="lbl" for="sh-c">Ce que j’ai aimé, ou pas</label>
+      <label class="lbl" for="sh-c">Ce que j’ai aimé, ou pas <span class="opt">(facultatif)</span></label>
       <textarea id="sh-c" maxlength="800" placeholder="Une scène, un personnage, une réplique…">${h(r.c)}</textarea>
-      <div class="mine-foot"><span class="save" data-save></span><button class="btn primary" id="sh-save" data-act="save-comment" disabled>Enregistrer mon avis</button></div>
+      <div class="mine-foot"><span class="save" data-save></span><button class="btn primary" id="sh-save" data-act="save-comment" disabled>Enregistrer mon commentaire</button></div>
     </section>` : `
     <section class="block"><h3>Mon avis</h3><p class="muted">Sortie en France le ${fmtDate(x.soon)}. Tu pourras le noter ce jour-là.</p></section>`;
   return `<div class="scrim" data-act="close"></div>
@@ -2038,6 +2048,15 @@ function titleSheet(x){
 }
 const appsHTML = films => films.map(f => `<button class="card lift" data-act="open" data-ctx="films" data-id="${f.id}" aria-label="${h(f.t)}">${coverHTML(f, {mini:true, num:false})}</button>`).join('');
 const filmsOf = c => c.apps.map(id => byId.get(id)).filter(Boolean).sort((a, b) => a.n - b.n);
+/* Page Wikipédia de l’acteur, à la section Filmographie : ses films hors Marvel compris.
+   Titres vérifiés sur fr.wikipedia.org le 18 novembre 2026 ; seuls deux noms mènent à une page d’homonymie. */
+const WIKI_FIX = {'Chris Evans':'Chris Evans (acteur)', 'Tom Holland':'Tom Holland (acteur)'};
+/* Le nom de l’acteur, dans la fiche, est lui-même le lien. « (voix) » reste hors du lien. */
+function actorHTML(c){
+  const name = c.by.replace(/\s*\(voix\)$/, ''), rest = c.by.slice(name.length);
+  const title = WIKI_FIX[name] || name;
+  return `<a class="wiki" href="https://fr.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}#Filmographie" target="_blank" rel="noopener noreferrer" title="Sa filmographie sur Wikipédia" aria-label="${h(name)} : sa filmographie sur Wikipédia, dans un nouvel onglet">${h(name)}</a>${h(rest)}`;
+}
 function charSheet(c){
   const films = filmsOf(c);
   const tv = c.tv.map(id => byId.get(id)).filter(Boolean).sort((a, b) => a.n - b.n);
@@ -2047,7 +2066,7 @@ function charSheet(c){
     <div class="char-top">
       ${monoHTML(c)}
       <div class="sheet-head"><p class="sheet-k">${GROUPS[c.g]}</p><h2 id="sh-t">${h(c.n)}</h2>
-        <dl class="facts">${c.a ? `<div><dt>Alias</dt><dd>${h(c.a)}</dd></div>` : ''}<div><dt>À l’écran</dt><dd>${h(c.by)}</dd></div></dl>
+        <dl class="facts">${c.a ? `<div><dt>Alias</dt><dd>${h(c.a)}</dd></div>` : ''}<div><dt>À l’écran</dt><dd>${actorHTML(c)}</dd></div></dl>
       </div>
     </div>
     <div class="sheet-main" style="display:block"><p class="sheet-s">${h(c.s)}</p><p class="artbar" id="sh-art">${artBar('c', c.id)}</p></div>
@@ -2117,7 +2136,8 @@ function bindRate(el, id){
   const at = x => { const b = stars.getBoundingClientRect(); return Math.max(.5, Math.min(5, Math.ceil((x - b.left) / b.width * 10) / 2)); };
   el.addEventListener('pointerdown', e => { if (e.button) return; down = true; try{ el.setPointerCapture(e.pointerId); }catch(_){} paint(at(e.clientX)); });
   el.addEventListener('pointermove', e => { if (down || e.pointerType === 'mouse') paint(at(e.clientX)); });
-  el.addEventListener('pointerup', e => { if (!down) return; down = false; setRev(id, {r: at(e.clientX)}); syncMine(id); });
+  /* La note s’enregistre dès le clic : le commentaire est facultatif, on le dit. */
+  el.addEventListener('pointerup', e => { if (!down) return; down = false; setRev(id, {r: at(e.clientX)}); syncMine(id); toast('Note enregistrée'); });
   el.addEventListener('pointercancel', () => { down = false; paint(cur()); });
   el.addEventListener('pointerleave', () => { if (!down) paint(cur()); });
   el.addEventListener('keydown', e => {
@@ -2131,6 +2151,7 @@ function bindRate(el, id){
     else return;
     e.preventDefault();
     setRev(id, {r: v}); syncMine(id);
+    toast(v ? 'Note enregistrée' : 'Note effacée');
   });
 }
 /* Enregistre le commentaire en cours s’il a changé. */
@@ -2454,8 +2475,8 @@ const ACT = {
     setRev(id, {s: !r.s});
     syncMine(id);
   },
-  'clear-rate'(){ const id = S.sheet.id; setRev(id, {r:0}); syncMine(id); },
-  'save-comment'(){ if (flushComment()){ $('#sh-save').disabled = true; toast('Avis enregistré'); } },
+  'clear-rate'(){ const id = S.sheet.id; setRev(id, {r:0}); syncMine(id); toast('Note effacée'); },
+  'save-comment'(){ if (flushComment()){ $('#sh-save').disabled = true; toast('Commentaire enregistré'); } },
   gstars(el){ S.gridStars = el.dataset.v; renderGridBar(); renderGrid(); },
   filter(el){ S.fAll = el.dataset.v; renderAll(); },
   cgroup(el){ S.charG = el.dataset.v; renderChars(); },
@@ -2913,6 +2934,27 @@ try{ if (localStorage.getItem('marathon.view') === 'grid') S.fview = 'grid'; }ca
 setTimeout(() => { S.stripAuto = false; }, 2600);
 buildRail();
 runIntro();
+/* Sur téléphone, la barre du haut se cache quand on descend et revient quand on remonte.
+   Elle reste visible en haut de page, fiche ouverte, ou quand le clavier y amène le focus. */
+(function(){
+  const mq = matchMedia('(max-width:760px)'), root = document.documentElement;
+  let last = scrollY, ticking = false;
+  const set = on => root.classList.toggle('bar-away', on);
+  addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const y = scrollY, d = y - last;
+      if (!mq.matches || y < 80 || document.body.classList.contains('is-locked')) set(false);
+      else if (d > 6) set(true);
+      else if (d < -6) set(false);
+      last = y;
+    });
+  }, {passive:true});
+  if (mq.addEventListener) mq.addEventListener('change', () => set(false));
+  document.addEventListener('focusin', e => { if (e.target.closest && e.target.closest('.bar')) set(false); });
+})();
 window.addEventListener('hashchange', () => route(false));
 route(true);
 boot();

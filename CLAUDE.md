@@ -29,7 +29,13 @@ Dans `index.html`, de haut en bas : jetons CSS (`:root`), styles, balisage des p
 | `ACT` | Gestionnaire de clics, par attribut `data-act` |
 | `runIntro` | Ouverture animée (anneau + barres), une fois par session |
 
-Pages (routage par `location.hash`) : `#films`, `#tout` (Films + séries), `#classement`, `#personnages`, `#avancee`, `#compte`, `#cgu`, `#contact`.
+Pages (routage par `location.hash`) : `#films` (onglet « Accueil »), `#tout` (onglet « Chronologie »), `#classement`, `#personnages`, `#avancee`, `#compte`, `#cgu`, `#contact`. Les onglets ont été renommés le 18 novembre 2026 (ils s'appelaient « Films » et « Films + séries ») ; les adresses n'ont pas changé.
+
+Retours d'amis appliqués le même jour :
+- Dans une fiche, la note s'enregistre au clic sur les étoiles (message « Note enregistrée ») ; le commentaire est marqué facultatif et a son propre bouton.
+- La consigne du Classement est en gras.
+- Dans chaque fiche personnage, le nom de l'acteur (« À l'écran ») est lui-même un lien vers la section Filmographie de sa page Wikipédia (`actorHTML`). Le propriétaire ne veut ni bouton ni lien séparé en dessous. `WIKI_FIX` corrige les deux noms qui mènent à une page d'homonymie ; vérifie les titres sur fr.wikipedia.org si tu ajoutes un personnage.
+- Sur téléphone (760 px et moins), la pastille du haut se cache quand on descend et revient quand on remonte (classe `bar-away` sur `<html>`).
 
 ## Données
 
@@ -90,10 +96,11 @@ Reste à faire :
 3. **Contact** : le 18 novembre 2026, le propriétaire a créé une adresse e-mail réservée au site et son formulaire Formspree, et `CONTACT_FORM` est rempli ; son premier envoi réel est bien arrivé. C'est par là qu'arrivent les signalements et les demandes sur les données. Ne soumets pas toi-même le vrai formulaire : chaque envoi arrive dans sa boîte et compte dans son quota gratuit ; pour tes essais, utilise le faux Formspree du serveur d'essai. `CONTACT` reste facultatif, et son nom vide : l'éditeur est anonyme. N'invente rien, et n'utilise pas son adresse personnelle sans son accord explicite : le site sera public.
 4. **Mise en ligne** : suivre `README.md`. Après la première publication, vérifier que `https://mcuclassement.fr/images/liste.json` renvoie bien une liste JSON (sinon le site retombe sur l'essai nom par nom, plus lent).
 5. **Si le site grandit** : au-delà de quelques dizaines d'inscrits actifs, la moyenne ne porte plus sur tout le monde, et les lectures gratuites peuvent manquer. Il faudra alors des totaux tenus à jour côté serveur, ce qui demande l'offre payante de Firebase : **demande au propriétaire** avant.
+6. **Idées gardées pour plus tard** (retours d'amis, 18 novembre 2026, à proposer, pas à faire d'office) : rappeler sur l'accueil le top 3 des films classés en S ; une page « Mes avis » pour retrouver ses notes et commentaires, avec une image d'un avis à partager. Déconseillé au propriétaire : retirer la rangée de films de l'accueil. Une demande vague d'« afficher plus d'infos sur téléphone » attend des précisions.
 
 ## Ce qu'il ne faut pas changer sans demander
 
-- **Direction visuelle** : fond rouge Marvel sombre (jetons `--bg`, `--glowa`, `--glowb`…), police Archivo variable hébergée dans `fonts/` (axe de largeur), en-tête en pastille flottante, affiches typographiques en dégradé, survol qui soulève et incline l'affiche, rangée de films défilante avec flèches et bouton « Tout afficher », onglet Avancée (films gris tant qu'ils ne sont pas notés), ouverture animée une fois par session (désactivée si l'appareil demande moins d'animations).
+- **Direction visuelle** : fond rouge Marvel sombre (jetons `--bg`, `--glowa`, `--glowb`…), police Archivo variable hébergée dans `fonts/` (axe de largeur), en-tête en pastille flottante (cachée au défilement vers le bas sur téléphone, à la demande du propriétaire), affiches typographiques en dégradé, survol qui soulève et incline l'affiche, rangée de films défilante avec flèches et bouton « Tout afficher », onglet Avancée (films gris tant qu'ils ne sont pas notés), ouverture animée une fois par session (désactivée si l'appareil demande moins d'animations).
 - **Nom affiché** : « MCU » dans l'en-tête et le titre de la page ; titre de l'accueil « Marvel Cinematic Universe », sans paragraphe dessous.
 - **Contenu protégé** : chaque titre a une affiche typographique originale. Les vraies images ne viennent que de ce que le propriétaire fournit lui-même, sous sa responsabilité. Le 18 novembre 2026, à sa demande, ses propres affiches (son dossier « Affiche Film Marvel » : affiches officielles et créations de fans) ont été réduites et rangées dans `images/`. Il les a choisies titre par titre, et les 79 titres en ont une ; What If…? saisons 2 et 3 et Daredevil: Born Again saison 2 reprennent l'affiche d'une autre saison, faute de mieux. Aucune image de personnage pour l'instant. Ne télécharge jamais toi-même d'image de Marvel/Disney. Le propriétaire a eu un avis juridique favorable le 18 novembre 2026 pour le nom de domaine, le sigle « MCU » et ces affiches. Si un ayant droit demande un retrait, préviens-le : c'est à lui de trancher.
 - **Style des textes** : français, tutoiement, phrases courtes, apostrophes typographiques (’) et guillemets « », pas de points d'exclamation.

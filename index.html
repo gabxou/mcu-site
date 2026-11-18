@@ -14,10 +14,12 @@
 <meta property="og:url" content="https://mcuclassement.fr/">
 <meta property="og:title" content="MCU">
 <meta property="og:description" content="Tous les films Marvel dans l’ordre chronologique, à noter et à classer.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* ---------- Police ---------- */
+/* Archivo variable (graisse 100 à 900, largeur 62 % à 125 %), hébergée avec le site : aucune requête vers Google.
+   Fichier latin de Google Fonts, licence SIL Open Font License (fonts/LICENCE.txt). */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url(fonts/archivo-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* ---------- Jetons ---------- */
 :root{
   color-scheme:dark;
@@ -580,9 +582,9 @@ textarea:focus-visible{outline:2px solid var(--tx);outline-offset:1px}
       <div><h2>Objet du site</h2><p>Ce site est un site de fans, non officiel. Il permet de suivre les films et les séries de l’univers Marvel dans l’ordre de leur histoire, de les noter, de les commenter et de les classer<span data-if="acct" hidden>, et de lire les avis des autres personnes inscrites</span>. Il n’est ni affilié à Marvel ou à Disney, ni approuvé par eux.</p></div>
       <div><h2>Accès</h2><p>L’accès au site est gratuit. Le site est proposé en l’état : il peut évoluer, être interrompu ou être fermé à tout moment, sans préavis. Les informations présentées, notamment l’ordre et les époques des histoires, sont données à titre indicatif.</p></div>
       <div data-if="noacct"><h2>Vos notes et vos données</h2><p>Il n’y a ni inscription, ni compte, ni mot de passe. Vos notes, vos commentaires et votre tier list sont enregistrés uniquement dans votre navigateur, sur votre appareil. Ils ne sont pas transmis au responsable du site et ne sont visibles par personne d’autre.</p><p>Vous pouvez les modifier ou les effacer à tout moment depuis les fiches, en télécharger une copie depuis la page <a href="#compte">Compte</a>, ou tout supprimer en effaçant les données du site dans votre navigateur.</p><p>Le site n’utilise ni cookie, ni publicité, ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes et vos réglages d’affichage.</p></div>
-      <div data-if="acct" hidden><h2>Compte, notes et données</h2><p>Vous pouvez utiliser le site sans compte : vos notes, vos commentaires et votre tier list restent alors uniquement dans votre navigateur, sur votre appareil.</p><p>Vous pouvez aussi créer un compte avec une adresse e-mail et un mot de passe, ou avec un compte Google ou Apple lorsque le site le propose. Le site enregistre alors votre adresse e-mail, votre pseudo, vos notes, vos commentaires et votre tier list, afin de vous les rendre sur tous vos appareils. Votre mot de passe est géré par le service de comptes : le responsable du site n’y a pas accès.</p><p>Vos notes, vos commentaires, votre tier list et votre pseudo sont visibles par les autres personnes inscrites. Votre adresse e-mail ne leur est jamais montrée.</p><p>Vous pouvez modifier ou effacer vos avis à tout moment depuis les fiches, en télécharger une copie et supprimer votre compte depuis la page <a href="#compte">Compte</a> : vos données sont alors effacées. Vous pouvez aussi demander l’accès à vos données, leur correction ou leur effacement en écrivant à l’adresse de la page <a href="#contact">Contact</a>.</p><p>Le site n’utilise ni publicité ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes, vos réglages d’affichage et votre connexion.</p></div>
+      <div data-if="acct" hidden><h2>Compte, notes et données</h2><p>Vous pouvez utiliser le site sans compte : vos notes, vos commentaires et votre tier list restent alors uniquement dans votre navigateur, sur votre appareil.</p><p>Vous pouvez aussi créer un compte avec une adresse e-mail et un mot de passe, ou avec un compte Google ou Apple lorsque le site le propose. Le site enregistre alors votre adresse e-mail, votre pseudo, vos notes, vos commentaires et votre tier list, afin de vous les rendre sur tous vos appareils. Votre mot de passe est géré par le service de comptes : le responsable du site n’y a pas accès.</p><p>Vos notes, vos commentaires, votre tier list et votre pseudo sont visibles par les autres personnes inscrites. Votre adresse e-mail ne leur est jamais montrée.</p><p>Vous pouvez modifier ou effacer vos avis à tout moment depuis les fiches, en télécharger une copie et supprimer votre compte depuis la page <a href="#compte">Compte</a> : vos données sont alors effacées. Vous pouvez aussi demander l’accès à vos données, leur correction ou leur effacement en écrivant à l’adresse de la page <a href="#contact">Contact</a>.</p><p>Le site n’utilise ni publicité ni outil de mesure d’audience. Le stockage du navigateur sert seulement à garder vos notes, vos réglages d’affichage et votre connexion. Si vous ouvrez la page Compte, le service de comptes y range aussi quelques données techniques sur son propre fonctionnement.</p></div>
       <div data-if="acct" hidden><h2>Contenus que vous publiez</h2><p>Vos commentaires, votre tier list et votre pseudo sont lus par les autres personnes inscrites : vous en êtes responsable. Sont interdits les contenus illicites, injurieux, haineux ou portant atteinte aux droits d’autrui, ainsi que la publicité et l’usurpation d’identité.</p><p>Le responsable du site peut retirer un contenu ou fermer un compte qui ne respecte pas ces règles. Pour signaler un contenu, écrivez à l’adresse indiquée sur la page <a href="#contact">Contact</a>.</p></div>
-      <div><h2>Hébergement et services tiers</h2><p>Le site est hébergé par GitHub Pages, un service de GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, États-Unis. Comme tout hébergeur, GitHub reçoit l’adresse IP des visiteurs pour leur transmettre les pages.</p><p>La police de caractères est fournie par Google Fonts, un service de Google, qui reçoit lui aussi l’adresse IP de votre appareil au moment de son chargement.</p><p data-if="acct" hidden>Les comptes et les données qui s’y rattachent sont gérés avec Firebase, un service de Google. Google traite ces données pour le compte du responsable du site, y compris en dehors de l’Union européenne, notamment aux États-Unis, et reçoit l’adresse IP de votre appareil à chaque connexion.</p></div>
+      <div><h2>Hébergement et services tiers</h2><p>Le site est hébergé par GitHub Pages, un service de GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, États-Unis. Comme tout hébergeur, GitHub reçoit l’adresse IP des visiteurs pour leur transmettre les pages.</p><p>La police de caractères et les images sont hébergées avec le site. <span data-if="noacct">Le site ne fait appel à aucun autre service.</span></p><p data-if="acct" hidden>Les comptes et les données qui s’y rattachent sont gérés avec Firebase, un service de Google. Google traite ces données pour le compte du responsable du site, y compris en dehors de l’Union européenne, notamment aux États-Unis. Le site ne fait appel à Firebase que si vous ouvrez la page Compte ou si vous êtes connecté : Google reçoit alors l’adresse IP de votre appareil. Sans compte, le site ne fait appel à aucun autre service.</p></div>
       <div><h2>Propriété intellectuelle</h2><p>Marvel, les titres des films et des séries ainsi que les noms des personnages appartiennent à leurs détenteurs respectifs. Ils ne sont cités ici que pour désigner les œuvres concernées. Les textes de présentation et l’habillage du site ont été créés pour lui.</p><p>Les éventuelles images d’illustration restent la propriété de leurs auteurs. Tout détenteur de droits qui souhaite le retrait d’un contenu peut en faire la demande depuis la page <a href="#contact">Contact</a> ; il sera retiré dans les meilleurs délais.</p></div>
       <div><h2>Responsabilité</h2><p>Le responsable du site ne peut être tenu pour responsable d’une erreur dans les informations présentées, d’une interruption du service ou d’une perte des notes enregistrées.</p></div>
       <div><h2>Éditeur et contact</h2><p>Le site est édité par la personne indiquée sur la page <a href="#contact">Contact</a>. Pour toute question ou demande concernant le site, écrivez à l’adresse qui y figure.</p></div>
@@ -1440,6 +1442,15 @@ async function startFirebase(){
     render();
   }
 }
+/* Firebase n’est chargé que pour les comptes : page Compte ouverte, compte déjà ouvert sur cet appareil,
+   ou connexion dans un autre onglet. Un visiteur sans compte n’échange donc rien avec Google, et son
+   navigateur ne reçoit rien d’autre que ses notes et ses réglages : pas besoin de bandeau cookies. */
+let fbWake = false;
+function wakeFirebase(){
+  if (S.be !== 'firebase' || fbWake) return;
+  fbWake = true;
+  startFirebase();
+}
 /* L’adresse vient peut-être d’être confirmée dans un autre onglet. */
 let verifT = 0;
 function refreshVerified(){
@@ -1462,7 +1473,8 @@ function boot(){
     /* Compte déjà ouvert sur cet appareil : sa copie s’affiche sans attendre le service. */
     const m = loadMirror();
     if (m) enterAccount(m.uid, m);
-    startFirebase();
+    if (m || S.view === 'compte') wakeFirebase();
+    window.addEventListener('storage', e => { if (e.key === 'marathon.acct' && e.newValue) wakeFirebase(); });
   }
   render();
   probeArt(cached);
@@ -1613,7 +1625,7 @@ function renderNotice(){
     if (S.me.isOwner && !otherKeys(D.sr).length && !S.slow) parts.push(`<div class="note"><span>Tu es seul ici pour l’instant. Partage la page avec tes amis : avec un accès en modification, leurs notes apparaîtront à côté des tiennes.</span></div>`);
   } else if (fb && S.auth.user){
     parts.push(`<div class="note"><span>L’enregistrement sur ton compte ne marche pas pour l’instant. Tes notes restent sur cet appareil.</span><button class="btn sm" data-act="auth-resync">Réessayer</button></div>`);
-  } else if (fb && S.auth.ready && countLive(D.lr)){
+  } else if (fb && (S.auth.ready || !fbWake) && countLive(D.lr)){
     parts.push(`<div class="note"><span>Crée un compte pour retrouver tes notes sur tous tes appareils et lire les avis des autres inscrits.</span><a class="btn sm" href="#compte" data-act="auth-tab" data-v="up">Créer un compte</a></div>`);
   } else if (S.mode === 'local' && S.be === 'claude'){
     parts.push(`<div class="note"><span>${S.shareRead
@@ -2294,7 +2306,7 @@ function route(first){
   Object.keys(VIEWS).forEach(k => { $('#v-' + k).hidden = k !== v; });
   if (changed && !first) window.scrollTo(0, 0);
   render();
-  if (v === 'compte') refreshVerified();
+  if (v === 'compte'){ wakeFirebase(); refreshVerified(); }
 }
 let toastT = 0;
 function toast(msg){

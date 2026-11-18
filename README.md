@@ -26,6 +26,14 @@ Ouvre ensuite http://localhost:8000.
 
 Tu es responsable des images que tu ajoutes. Les affiches et les photos officielles sont protégées par le droit d’auteur.
 
+## Cookies
+
+Le site n’a pas besoin de bandeau cookies. Il range dans le navigateur seulement ce que le visiteur demande : ses notes, ses réglages d’affichage et, s’il a un compte, sa connexion. La CNIL dispense ces usages de consentement, et les CGU les expliquent aux visiteurs.
+
+Un visiteur sans compte ne contacte aucun autre service que l’hébergeur : la police est dans le dossier `fonts`, et le service de comptes n’est chargé que sur la page Compte ou pour un visiteur connecté.
+
+Il faudra un bandeau, avec un bouton « Tout refuser » aussi simple que « Tout accepter », si tu ajoutes un jour des statistiques de visites, de la publicité, des vidéos YouTube intégrées ou des boutons de réseaux sociaux.
+
 ## Coordonnées de la page Contact
 
 Dans `index.html`, cherche `const CONTACT` et remplis le nom et l’e-mail. Tant qu’ils sont vides, la page Contact l’indique. Remplis-les avant de rendre le site public : avec les comptes, c’est à cette adresse que les gens signalent un commentaire ou demandent la suppression de leurs données.

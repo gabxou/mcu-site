@@ -1,0 +1,9 @@
+Police Archivo, fichier archivo-latin.woff2
+
+Copyright 2020 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)
+
+Cette police est distribuée sous la licence SIL Open Font License, version 1.1.
+Texte de la licence : https://openfontlicense.org/open-font-license-official-text/
+
+Le fichier est celui que fournit Google Fonts (jeu de caractères latin), sans modification.
+Il porte lui-même ce droit d’auteur et l’adresse de la licence.

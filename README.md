@@ -20,6 +20,7 @@ Ouvre ensuite http://localhost:8000.
 - Portraits des personnages : `images/personnages/<identifiant>.<format>`, par exemple `images/personnages/wanda.webp`.
 - Formats acceptés : `.webp`, `.jpg`, `.jpeg` ou `.png`. Écris le nom en minuscules.
 - La liste des identifiants est dans `images/NOMS-DES-FICHIERS.csv`. La colonne « dossier » dit où ranger chaque fichier. `wanda`, `vision` et `groot` existent deux fois, pour une série et pour un personnage : c’est le dossier qui les distingue.
+- Taille conseillée : 480 × 720 pixels, au format `.jpg`. À l’écran, une affiche fait au plus 186 pixels de large : une image plus grande marche, mais ralentit le site.
 - Si une image manque, l’affiche typographique reste.
 - Sur le site en ligne, une nouvelle image apparaît quelques minutes après l’envoi sur GitHub.
 

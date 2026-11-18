@@ -209,6 +209,10 @@ Après une modification, par exemple une image ajoutée : écris un résumé, **
 5. Pour `www` : supprime les éventuels A ou AAAA sur `www`, puis ajoute un **CNAME**, nom d’hôte `www`, « Pointe vers » `PSEUDO.github.io` (sans le nom du dépôt). GitHub redirigera `www.mcuclassement.fr` vers `mcuclassement.fr`.
 6. Ne touche pas aux enregistrements **MX** : ils servent à l’e-mail. N’ajoute pas d’enregistrement générique `*`.
 
+Attention, IONOS a une habitude vue lors de la mise en ligne : quand tu ajoutes des A ou AAAA sur `@`, il les recopie sur `www` et désactive le CNAME `www`. Remets ensuite le CNAME `www`. IONOS proposera de désactiver des enregistrements : accepte seulement si la liste ne contient que des lignes `www`, jamais `@`.
+
+Le certificat HTTPS ne couvre `www` que si `www` est un CNAME. S’il manque `www`, va dans **Settings**, **Pages** du dépôt, et enregistre de nouveau le domaine. Si ça ne suffit pas, retire-le avec **Remove**, puis remets-le. Dans ce cas, GitHub ajoute deux commits sur le fichier `CNAME` : clique ensuite sur **Fetch origin**, puis **Pull origin** dans GitHub Desktop, avant de travailler sur le site.
+
 IONOS annonce moins d’une heure pour que les changements se propagent, parfois jusqu’à 72 heures.
 
 ### 4. HTTPS

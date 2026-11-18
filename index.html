@@ -97,15 +97,16 @@ main{overflow-x:clip}
 .av.ini{display:grid;place-items:center;font-size:.72rem;font-weight:750;font-style:normal;color:var(--tx)}
 
 /* ---------- Barre du bas (mobile) ---------- */
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;grid-template-columns:repeat(5,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:var(--barbg);-webkit-backdrop-filter:saturate(170%) blur(18px);backdrop-filter:saturate(170%) blur(18px);border-top:1px solid var(--line)}
-.dock a{display:grid;justify-items:center;gap:3px;padding:6px 2px;text-decoration:none;color:var(--tx3);font-size:.69rem;font-weight:650;font-stretch:92%;border-radius:10px;white-space:nowrap}
+/* Barre d’onglets du téléphone : une pastille qui flotte, comme l’en-tête sur ordinateur. */
+.dock{position:fixed;left:50%;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:30;display:none;grid-template-columns:repeat(5,1fr);width:calc(min(520px,100%) - 2*max(20px,4.2vw) + 24px);transform:translateX(-50%);padding:5px 6px;border-radius:999px;border:1px solid var(--line2);background:var(--glass);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);box-shadow:0 16px 44px -18px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.08)}
+.dock a{display:grid;justify-items:center;gap:3px;padding:6px 2px;text-decoration:none;color:var(--tx3);font-size:.69rem;font-weight:650;font-stretch:92%;border-radius:999px;white-space:nowrap}
 .dock svg{width:23px;height:23px}
-.dock a.is-on{color:var(--tx)}
+.dock a.is-on{color:var(--tx);background:rgba(255,255,255,.08)}
 .dock a.is-on svg{color:var(--gold)}
 @media (max-width:760px){
   .dock{display:grid}
   .tabs{display:none}
-  main{padding-bottom:calc(var(--dockh) + 36px)}
+  main{padding-bottom:calc(var(--dockh) + 46px + env(safe-area-inset-bottom,0px))}
   :root{--tw:70px}
   /* La barre du haut se cache quand on descend (les onglets sont en bas), et revient quand on remonte. */
   .bar{transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s}
@@ -206,7 +207,10 @@ main{overflow-x:clip}
 .note input{min-width:0;width:15em;padding:.5em .9em;border-radius:999px;border:1px solid var(--line2);background:rgba(13,13,16,.5)}
 .feed{margin-top:clamp(24px,3.4vw,40px)}
 .feed-h{font-size:1.05rem;font-weight:750;font-stretch:110%;letter-spacing:-.01em;margin-bottom:12px}
-.feed-s{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+/* Les avis défilent jusqu’aux bords de l’écran, comme la rangée de films ; le premier reste aligné sur la page. */
+.feed-s{display:flex;gap:12px;overflow-x:auto;margin:0 calc(-1*var(--edge));padding:2px var(--edge) 8px;scroll-padding:0 var(--edge);scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.feed-s::-webkit-scrollbar{display:none}
+.feed-s > .fi{scroll-snap-align:start}
 .fi{flex:none;width:min(260px,72vw);display:grid;align-content:start;gap:6px;padding:14px;text-align:left;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer}
 .fi:hover{border-color:var(--line2)}
 .fi-h{display:flex;align-items:center;gap:8px;min-width:0}
@@ -384,7 +388,7 @@ a.wiki:hover,a.wiki:focus-visible{text-decoration-color:currentColor}
 .pb-x{background:rgba(255,255,255,.1);color:var(--tx)}
 .pb-x svg{width:18px;height:18px}
 @media (max-width:760px){
-  #placebar{left:10px;right:10px;bottom:calc(var(--dockh) + 14px + env(safe-area-inset-bottom,0px));transform:none;max-width:none;flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px 12px;border-radius:24px}
+  #placebar{left:10px;right:10px;bottom:calc(var(--dockh) + 26px + env(safe-area-inset-bottom,0px));transform:none;max-width:none;flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px 12px;border-radius:24px}
   .pb-t{text-align:center}
   .pb-b{justify-content:space-between}
 }

@@ -142,9 +142,11 @@ Tu es responsable des commentaires que les inscrits publient.
 
 ### Connexion avec Google
 
-Le bouton « Continuer avec Google » est prévu dans le code, mais éteint. La raison : Google montre une adresse e-mail « d’assistance » aux personnes qui se connectent ainsi. D’après l’aide de Google, ce doit être l’adresse du compte Google connecté à la console, ou un groupe Google qu’il gère. Avec ton compte personnel, ce serait donc ton adresse personnelle.
+Le bouton « Continuer avec Google » est allumé depuis le 19 novembre 2026, avec l’adresse du site comme adresse d’assistance.
 
-Pour l’allumer sans montrer ton adresse :
+Pourquoi cette précaution : Google montre une adresse e-mail « d’assistance » aux personnes qui se connectent ainsi. D’après l’aide de Google, ce doit être l’adresse du compte Google connecté à la console, ou un groupe Google qu’il gère. Avec ton compte personnel, ce serait donc ton adresse personnelle.
+
+Pour mémoire, la marche à suivre pour l’allumer sans montrer ton adresse :
 
 1. Crée un compte Google réservé au site. Son adresse peut aussi servir pour la page Contact.
 2. Dans les réglages du projet Firebase, ajoute ce compte parmi les propriétaires du projet.
